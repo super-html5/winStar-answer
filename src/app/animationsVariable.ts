@@ -62,6 +62,7 @@ export const fadeIn = [trigger('fadeIn', [transition('void => *', opts.fadeIn)])
 export const fadeOut = [trigger('fadeOut', [transition('* => void', opts.fadeOut)])];
 export const stretch = [trigger('stretch', [transition('void => *', opts.stretch)])];
 export const shrink = [trigger('shrink', [transition('* => void', opts.shrink)])];
+
 export const flyIn = [
   trigger('flyIn', [
     state('inactive', style({
