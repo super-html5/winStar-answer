@@ -5,12 +5,14 @@
 }
 
 .page-success {
-  @include location(84%, 8%, 8%);
+  width: 84%;
+  margin-left: 8%;
+  margin-top: 8%;
 }
 
 .page-rank {
   color: #eee;
-  @include location(100%, 11.5%, 0);
+  @include location(100%, 22%, 0);
   span {
     color: #fefb27;
   }
@@ -18,5 +20,5 @@
 }
 
 .button_use {
-  @include location(75%, 55%, 12.5%);
+  margin-left: 12.5%;
 }
