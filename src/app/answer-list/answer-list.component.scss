@@ -1,0 +1,38 @@
+@mixin location($width,$height,$m-top,$m-left) {
+  width: $width;
+  height: $height;
+  margin-top: $m-top;
+  margin-left: $m-left;
+}
+
+@mixin bgImg($name,$size) {
+  background: url('./../../assets/img/' + $name) no-repeat;
+  background-size: $size;
+}
+
+.bigBox {
+  @include bgImg('page1_02.jpg', 100% 100%);
+  .question {
+    height: 46%;
+    padding: 5% 5% 0 5%;
+    .question_top {
+      height: 26%;
+      @include bgImg('page1_02_content1.png', 100% 100%);
+    }
+    .question_bottom {
+      height: 74%;
+      margin-top: -10px;
+      @include bgImg('page1_02_content2.png', 100% 100%);
+    }
+  }
+  .answer {
+    height: 54%;
+    word-break: normal;
+    white-space: pre-wrap;
+    .answer1, .answer2, .answer3, .answer4 {
+      @include location(80%, 15%, 4%, 10%);
+      @include bgImg('btn_abcd.png', 100% 100%);
+    }
+  }
+}
+
