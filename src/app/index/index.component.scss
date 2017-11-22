@@ -1,19 +1,21 @@
+@mixin location($left,$top) {
+  left: $left;
+  top: $top;
+}
+
 .bg_blue {
   background: #2dcffe;
   .btn_startAnswer, .btn_rankingList, .currentRank {
     z-index: 99;
   }
   .btn_startAnswer {
-    top: 55%;
-    left: 12.5%;
+    @include location(12.5%, 55%)
   }
   .btn_rankingList {
     top: 22%;
     right: 10%;
   }
   .currentRank {
-    top: 22%;
-    left: 10%;
-
+    @include location(10%, 22%)
   }
 }

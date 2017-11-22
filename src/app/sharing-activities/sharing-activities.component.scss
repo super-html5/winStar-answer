@@ -1,0 +1,12 @@
+@mixin location($top,$left) {
+  top: $top;
+  left: $left;
+}
+
+.page-share2 {
+  @include location(8%, 12.5%);
+}
+
+.btn-share {
+  @include location(73%, 12.5%);
+}

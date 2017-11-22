@@ -1,0 +1,22 @@
+@mixin location($width,$top,$left) {
+  width: $width;
+  top: $top;
+  left: $left;
+}
+
+.page-success {
+  @include location(84%, 8%, 8%);
+}
+
+.page-rank {
+  color: #eee;
+  @include location(100%, 11.5%, 0);
+  span {
+    color: #fefb27;
+  }
+
+}
+
+.button_use {
+  @include location(75%, 55%, 12.5%);
+}

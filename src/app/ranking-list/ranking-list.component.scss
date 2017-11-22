@@ -1,0 +1,50 @@
+.rank_top {
+  height: 10%;
+  background: url('./../../assets/img/page2_01.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+
+.rank_content {
+  height: 86%;
+  background: url('./../../assets/img/page2_02.jpg') 0 0 no-repeat,
+  url('./../../assets/img/page2_05.jpg') 0 20% no-repeat,
+  url('./../../assets/img/page2_04.jpg') 0 70% no-repeat;
+  background-size: 100% 20%, 100% 70%, 100% 100%;
+}
+
+.rank_bottom {
+  height: 4%;
+  background: url('./../../assets/img/page2_03.jpg') no-repeat;
+  background-size: 100% 100%;
+  margin-top: -1px;
+}
+
+.rank_list {
+  height: 84%;
+  left: 12.5%;
+  top: 11%;
+  border-radius: 2%;
+  overflow: scroll;
+  > li {
+    border-bottom: 1px solid #eee;
+    &:nth-last-child(1) {
+      border-right: 0;
+    }
+    span {
+      width: 33.3%;
+      img{
+        width: 22%;
+        margin-top: -4%;
+      }
+    }
+  }
+  .rank_list_top {
+    color: #888;
+    span {
+      border-right: 1px solid #eee;
+      &:nth-of-type(3) {
+        border-right: 0;
+      }
+    }
+  }
+}

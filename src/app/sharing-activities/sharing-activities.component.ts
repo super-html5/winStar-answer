@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sharing-activities',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sharing-activities.component.scss']
 })
 export class SharingActivitiesComponent implements OnInit {
-
-  constructor() { }
+  @ViewChild('bigBox') bigBox: ElementRef;
+  constructor(private title: Title) {
+  }
 
   ngOnInit() {
+    this.title.setTitle('活动分享');
+    this.bigBox.nativeElement.style.height = document.body.offsetHeight + 'px';
+
   }
 
 }

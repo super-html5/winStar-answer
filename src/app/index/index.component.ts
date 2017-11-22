@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 import {flyIn} from '../animationsVariable';
 @Component({
   selector: 'app-index',
@@ -8,10 +9,11 @@ import {flyIn} from '../animationsVariable';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() {
+  constructor(private title: Title) {
   }
 
   ngOnInit() {
+    this.title.setTitle('加油优惠券');
   }
 
 }
