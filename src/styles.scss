@@ -4,8 +4,8 @@
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome';
 
-html, body {
-  height: 100%;
+.unifyBg {
+  top: 0;
+  bottom: 0;
+  z-index: -2;
 }
-
-
