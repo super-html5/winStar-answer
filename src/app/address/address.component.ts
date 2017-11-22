@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 
 @Component({
@@ -7,7 +7,7 @@ import {Title} from '@angular/platform-browser';
   styleUrls: ['./address.component.scss']
 })
 export class AddressComponent implements OnInit {
-  @ViewChild('bigBox') bigBox: ElementRef;
+  showShade: boolean = false;
 
   constructor(private title: Title) {
   }
@@ -16,4 +16,11 @@ export class AddressComponent implements OnInit {
     this.title.setTitle('我要领奖');
   }
 
+  affirm(): void {
+    this.showShade = true;
+  }
+  hiddenShade(): void {
+    console.log(11);
+    this.showShade = false;
+  }
 }

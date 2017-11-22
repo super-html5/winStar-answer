@@ -1,5 +1,5 @@
 <div class="row">
-  <img class="position-absolute w-100 h-100 unifyBg"  src="./assets/img/page-share1.jpg" alt="">
+  <img class="position-absolute w-100 h-100 unifyBg" src="./assets/img/page-share1.jpg" alt="">
   <div class="col-12 px-0 bigBox">
     <div class="w-100 page-addr-top position-relative">
       <img class="w-100 page-address1" src="./assets/img/page-address1.png" alt="">
@@ -12,8 +12,14 @@
       <textarea class="w-100 pl-2 py-2 mt-2 mb-3 align-middle" name="" placeholder="地址"></textarea>
     </div>
     <div>
-      <img class="w-75 mt-4 btn_affirm" src="./assets/img/btn_affirm.png" alt="">
+      <img (click)="affirm()" class="w-75 mt-5 btn_affirm" src="./assets/img/btn_affirm.png" alt="">
     </div>
 
   </div>
 </div>
+<div *ngIf="showShade" (click)="hiddenShade()" class="addr-success position-fixed">
+  <img src="./assets/img/page-addr-success.png" alt="">
+  <img src="./assets/img/button-confirm.png" alt="">
+
+</div>
+<div *ngIf="showShade" class="shade position-fixed"></div>
