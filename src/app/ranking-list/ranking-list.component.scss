@@ -1,3 +1,4 @@
+/*
 .rank_top {
   height: 10%;
   background: url('./../../assets/img/page2_01.jpg') no-repeat;
@@ -18,32 +19,52 @@
   background-size: 100% 100%;
   margin-top: -1px;
 }
-
+*/
+.smallBg {
+  width: 90%;
+  height: 90%;
+  top: 5%;
+  left: 5%;
+  bottom: 5%;
+  right: 5%;
+  z-index: -1;
+}
+.rank_content{
+  overflow: hidden;
+}
 .rank_list {
-  height: 84%;
-  left: 12.5%;
-  top: 11%;
+  height: 77%;
+  width: 90%;
+  z-index: 99;
+  margin-left:5%;
+  margin-top:29%;
   border-radius: 2%;
-  overflow: scroll;
-  > li {
-    border-bottom: 1px solid #eee;
-    &:nth-last-child(1) {
-      border-right: 0;
-    }
-    span {
-      width: 33.3%;
-      img{
-        width: 22%;
-        margin-top: -4%;
-      }
-    }
-  }
   .rank_list_top {
     color: #888;
     span {
+      width: 33%;
       border-right: 1px solid #eee;
       &:nth-of-type(3) {
         border-right: 0;
+      }
+    }
+  }
+  ul.rank_list_name {
+    margin: 0;
+    padding: 0;
+    height: 90%;
+    list-style-type: none;
+    overflow: scroll;
+    > li {
+      height: 50px;
+      line-height: 50px;
+      border-top: 1px solid #eee;
+      span {
+        width: 33.3%;
+        img {
+          width: 22%;
+
+        }
       }
     }
   }
