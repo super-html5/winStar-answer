@@ -4,31 +4,36 @@
   left: $left;
 }
 
-#bigBox {
-  background: url('./../../assets/img/page-share1.jpg') no-repeat 0 0;
+@media screen and (max-height: 480px) {
+  .bigBox {
+    background: #1ec3fd;
+    padding-bottom: 40px;
+  }
+}
+
+.page-addr-top {
+  padding: 8% 5% 0 5%;
+  .page-rank {
+    z-index: 99;
+    color: #eee;
+    @include location(100%, 23%, 0);
+    span {
+      color: #fefb27;
+    }
+  }
+}
+
+.page-addr-content {
+  width: 90%;
+  margin: -1px 0 0 5%;
+  padding: 0 5%;
+  background: url('./../../assets/img/page-address2.png') no-repeat 0 0;
   background-size: 100% 100%;
-  .page-addr-top {
-    padding: 8% 5% 0 5%;
-    .page-rank {
-      z-index: 99;
-      color: #eee;
-      @include location(100%, 23%, 0);
-      span {
-        color: #fefb27;
-      }
-    }
+  input, textarea {
+    border-color: #2dcffe;
   }
-  .page-addr-content {
-    width: 90%;
-    margin: -1px 0 0 5%;
-    padding: 0 5%;
-    background: url('./../../assets/img/page-address2.png') no-repeat 0 0;
-    background-size: 100% 100%;
-    input, textarea {
-      border-color: #2dcffe;
-    }
-  }
-  .btn_affirm {
-    margin-left: 12.5%;
-  }
+}
+
+.btn_affirm {
+  margin-left: 12.5%;
 }

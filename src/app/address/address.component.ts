@@ -14,7 +14,6 @@ export class AddressComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('我要领奖');
-    this.bigBox.nativeElement.style.height = document.body.offsetHeight + 'px';
   }
 
 }
