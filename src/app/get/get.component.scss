@@ -5,14 +5,16 @@
 }
 
 .page-get {
-  @include location(84%, 8%, 8%);
+  width: 84%;
+  margin-left: 8%;
+  margin-top: 8%;
 }
 
 .page-get-input {
   border-color: #35c3f6;
-  @include location(70%, 39%, 15%);
+  @include location(70%, 75%, 15%);
 }
 
 .btn_affirm {
-  @include location(75%, 60%, 12.5%);
+  margin-left: 12.5%;
 }
