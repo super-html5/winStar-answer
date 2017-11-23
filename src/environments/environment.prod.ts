@@ -28,5 +28,16 @@ export const environment = {
    * 领取奖品
    */
   receive: '/wechat_access/api/v1/activity/noauth/answer/activity/receive',
-
+  /**
+   * 获取全部题库
+   */
+  answerList: '/wechat_access/api/v1/activity/noauth/answer/saveAnswerQuestionRecord',
+  /**
+   * 保存答题分数
+   */
+  questionRecord: '/wechat_access/api/v1/activity/noauth/answer/saveAnswerQuestionRecord',
+  /**
+   * 保存答题日志
+   */
+  questionLog: '/wechat_access/api/v1/activity/noauth/answer/saveAnswerQuestionRecord'
 };

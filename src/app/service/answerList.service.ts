@@ -10,7 +10,7 @@ export class AnswerListService {
 
   }
 
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers = new Headers({'Content-Type': 'application/json', 'openid': 'olQf5t6N3ZdQNf9bB5BZ3r__KDz4'});
 
 
 }
