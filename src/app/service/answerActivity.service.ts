@@ -11,6 +11,7 @@ export class AnswerActivityService {
   }
 
   private headers = new Headers({'Content-Type': 'application/json'});
+  private openidHeaders = new Headers({'Content-Type': 'application/json', 'openid': 'olQf5t6N3ZdQNf9bB5BZ3r__KDz4'});
 
   /**
    * 创建用户信息
@@ -21,7 +22,7 @@ export class AnswerActivityService {
   createWechatUserInfo(openid: string, source: number): Promise<CreateWechatUserInfo> {
     const createUserInfoUrl = environment.createWechatUserInfo;
     return this.http
-      .post(createUserInfoUrl, {'openid': openid, 'source': source}, {headers: this.headers})
+      .post(createUserInfoUrl, JSON.stringify({'openid': openid, 'source': source}), {headers: this.headers})
       .toPromise()
       .then(res => res.json() as CreateWechatUserInfo)
       .catch();
@@ -47,13 +48,14 @@ export class AnswerActivityService {
       .catch();
   }
 
+
   /**
    * 用户排行
    * @returns {Promise<TResult|TResult2|GetUserActivityRanking>}
    */
   getUserActivityRanking(): Promise<GetUserActivityRanking> {
     const getUserRankingUrl = environment.getUserActivityRanking;
-    return this.http.get(getUserRankingUrl)
+    return this.http.get(getUserRankingUrl, {headers: this.openidHeaders})
       .toPromise()
       .then(res => res.json() as GetUserActivityRanking)
       .catch();

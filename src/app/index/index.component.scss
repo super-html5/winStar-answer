@@ -9,17 +9,47 @@
     z-index: 99;
   }
   .btn_startAnswer {
-    @include location(12.5%, 55%)
+    @include location(12.5%, 55%);
   }
   .btn_rankingList {
     top: 18%;
     right: 20%;
   }
   .btn_currentRank {
-    @include location(20%, 18%)
+    @include location(20%, 18%);
   }
   .btn_end {
     width: 40%;
-    @include location(30%, 18%)
+    @include location(30%, 18%);
+  }
+  .userRanking {
+    @include location(29.5%, 19.5%);
+    color: #00ddb4;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-shadow: 1px 1px rgba(255, 93, 45, 0.8), 1px 1px rgba(255, 93, 45, 0.8), 1px 1px rgba(255, 93, 45, 0.8), 1px 1px rgba(255, 93, 45, 0.8);
+  }
+
+  @media screen and (max-width: 320px) {
+    .userRanking {
+      font-size: 1.2rem;
+      @include location(29%, 19%);
+    }
+  }
+  .notRanking {
+    @include location(29%, 19.6%);
+    color: #00ddb4;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-shadow: 1px 1px rgba(255, 93, 45, 0.8), 1px 1px rgba(255, 93, 45, 0.8), 1px 1px rgba(255, 93, 45, 0.8), 1px 1px rgba(255, 93, 45, 0.8);
+  }
+  @media screen and (max-width: 320px) {
+    .notRanking {
+      font-size: 1rem;
+      @include location(28.5%, 19.2%);
+    }
   }
 }
+
+
+

@@ -6,7 +6,10 @@
     <img class="w-100" src="./assets/img/home-page_05.jpg" alt="">
     <img class="w-75 position-absolute btn_startAnswer" [routerLink]="['/answer']" src="./assets/img/btn_startAnswer.png" alt="">
     <img *ngIf="!IsPastDate" class="w-25 position-absolute btn_currentRank" src="./assets/img/btn_currentRank.png" alt="">
-    <img *ngIf="!IsPastDate" [routerLink]="['/rankingList']" class="w-25 position-absolute btn_rankingList" src="./assets/img/btn_rankingList.png" alt="">
+    <img *ngIf="!IsPastDate" [routerLink]="['/rankingList']" class="w-25 position-absolute btn_rankingList" src="./assets/img/btn_rankingList.png"
+         alt="">
     <img *ngIf="IsPastDate" class="position-absolute btn_end" src="./assets/img/btn_end.png" alt="">
+    <p *ngIf="isRanking"  class="position-absolute userRanking">{{userRanking}}</p>
+    <p *ngIf="!isRanking"  class="position-absolute notRanking">未上榜</p>
   </div>
 </div>
