@@ -1,5 +1,5 @@
 @mixin bgImg($name,$size) {
-  background: url('./../../../assets/img/' + $name) no-repeat;
+  background: url('../../../assets/img/' + $name) no-repeat;
   background-size: $size;
 }
 

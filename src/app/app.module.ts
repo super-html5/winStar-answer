@@ -12,9 +12,12 @@ import {GetSuccessComponent} from './get-success/get-success.component';
 import {GetComponent} from './get/get.component';
 import {SharingActivitiesComponent} from './sharing-activities/sharing-activities.component';
 import {AnswerListComponent} from './answer-list/answer-list.component';
-import {AnswerComponent} from './answer-list/answer/answer.component'
+import {AnswerComponent} from './answer-list/answer/answer.component';
+
 
 import {AnswerActivityService} from './service/answerActivity.service';
+import {AnswerListService} from './service/answerList.service';
+
 import {HttpModule} from '@angular/http';
 
 @NgModule({
@@ -34,7 +37,11 @@ import {HttpModule} from '@angular/http';
     AppRoutingModule,
     HttpModule
   ],
-  providers: [Title, {provide: LocationStrategy, useClass: HashLocationStrategy}, AnswerActivityService],
+  providers: [
+    Title,
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    AnswerActivityService,
+    AnswerListService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
