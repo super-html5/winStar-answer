@@ -14,21 +14,21 @@
   <div class="col-12">
     <img class="w-100 img-fluid" src="./assets/img/page1_02_content1.png">
     <div class="w-100 question_bottom">
-      <p>在狭窄的坡路会车，如遇下坡车不减速、不让行，应持续鸣喇叭迫使其停车让位。（单选题）</p>
+      <p>{{_index+1}}.{{_questionInfo?.title}}</p>
     </div>
   </div>
   <div class="col-12">
-    <div class="answer1">
-      A、交替变换远近光灯绕过行人交替变换远近光灯绕过行人交替变换远近光灯绕过行人交替变换远近光灯绕过行人
+    <div class="answer1" (click)="chooseOne('A')">
+      {{_questionInfo?.optionA}}
     </div>
-    <div class="answer2">
-      A、交替变换远近光灯绕过行人
+    <div class="answer2" (click)="chooseOne('B')">
+      {{_questionInfo?.optionB}}
     </div>
-    <div class="answer3">
-      A、交替变换远近光灯绕过行人
+    <div class="answer3" *ngIf="_questionInfo?.optionC" (click)="chooseOne('C')">
+      {{_questionInfo?.optionC}}
     </div>
-    <div class="answer4">
-      A、交替变换远近光灯绕过行人
+    <div class="answer4" *ngIf="_questionInfo?.optionD" (click)="chooseOne('D')">
+      {{_questionInfo?.optionD}}
     </div>
   </div>
 </div>

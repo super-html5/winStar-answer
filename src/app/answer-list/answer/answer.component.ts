@@ -1,4 +1,5 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter} from '@angular/core';
+import {QuestionInfo} from '../../entity/answerActivity';
 
 @Component({
   selector: 'app-answer',
@@ -6,11 +7,14 @@ import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
   styleUrls: ['./answer.component.scss']
 })
 export class AnswerComponent implements OnInit {
-
+  _questionInfo: QuestionInfo;
   _timer: number = 15;
   _progressBar: any;
+  _progressBarTimer: any;
+  _index: number;
   @ViewChild('bigBox') bigBox: ElementRef;
   @ViewChild('progressBar') progressBar: ElementRef;
+  @Output() onVoted = new EventEmitter<boolean>();
 
   constructor() {
 
@@ -20,6 +24,26 @@ export class AnswerComponent implements OnInit {
     this.bigBoxHeight();
     this.onProgressBarInit();
     this.remainingTimer();
+  }
+
+  @Input()
+  set QuestionInfo(questionInfo: QuestionInfo) {
+    this._questionInfo = questionInfo;
+    this._timer = 15;
+    this.progressBar.nativeElement.style.width = '100%';
+  }
+
+  get QuestionInfo(): QuestionInfo {
+    return this._questionInfo;
+  }
+
+  @Input()
+  set Index(index: number) {
+    this._index = index;
+  }
+
+  get Index(): number {
+    return this._index;
   }
 
   /**
@@ -49,10 +73,10 @@ export class AnswerComponent implements OnInit {
    * 时间倒计时
    */
   remainingTimer(): void {
-    let timer = setInterval(() => {
+    this._progressBarTimer = setInterval(() => {
       this._timer -= 1;
       if (this._timer === 0) {
-        clearInterval(timer);
+        clearInterval(this._progressBarTimer);
       }
     }, 1000);
   }
@@ -67,6 +91,14 @@ export class AnswerComponent implements OnInit {
       this.bigBox.nativeElement.style.height = (b_height + 50) + 'px';
     } else {
       this.bigBox.nativeElement.style.height = a_height + 'px';
+    }
+  }
+
+  chooseOne(answer: string): void {
+    if (answer === this._questionInfo.answer) {
+      this.onVoted.emit(true);
+    } else {
+      this.onVoted.emit(false);
     }
   }
 }
