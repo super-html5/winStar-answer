@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {flyIn} from '../animationsVariable';
+import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 
 @Component({
   selector: 'app-answer-list',
@@ -11,13 +12,17 @@ import {flyIn} from '../animationsVariable';
 export class AnswerListComponent implements OnInit {
   @ViewChild('bigBox') bigBox: ElementRef;
 
-  constructor(private title: Title) {
+  constructor(private title: Title,
+              private slimLoadingBarService: SlimLoadingBarService) {
 
   }
 
   ngOnInit() {
     this.title.setTitle('加油优惠券');
     this.bigBoxHeight();
+    this.slimLoadingBarService.start(() => {
+      console.log('Loading complete');
+    });
   }
 
   bigBoxHeight(): void {

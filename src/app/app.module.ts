@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
-
+import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
 
 import {AppComponent} from './app.component';
 import {IndexComponent} from './index/index.component';
@@ -28,8 +28,9 @@ import {AnswerListComponent} from './answer-list/answer-list.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SlimLoadingBarModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [Title, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
