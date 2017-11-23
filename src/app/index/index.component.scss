@@ -11,10 +11,14 @@
     @include location(12.5%, 55%)
   }
   .btn_rankingList {
-    top: 22%;
-    right: 10%;
+    top: 18%;
+    right: 20%;
   }
-  .currentRank {
-    @include location(10%, 22%)
+  .btn_currentRank {
+    @include location(20%, 18%)
+  }
+  .btn_end{
+    width: 40%;
+    @include location(30%, 18%)
   }
 }
