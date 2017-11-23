@@ -59,13 +59,5 @@ export class AnswerActivityService {
       .catch();
   }
 
-  /**
-   * 异常
-   * @param error 异常
-   */
-  private _error(error: any): Promise<any> {
-    console.log('this error :', error);
-    return Promise.reject(error.message || error);
-  }
 
 }
