@@ -12,6 +12,7 @@ import {GetSuccessComponent} from './get-success/get-success.component';
 import {GetComponent} from './get/get.component';
 import {SharingActivitiesComponent} from './sharing-activities/sharing-activities.component';
 import {AnswerListComponent} from './answer-list/answer-list.component';
+import {AnswerComponent} from './answer-list/answer/answer.component'
 
 import {AnswerActivityService} from './service/answerActivity.service';
 import {HttpModule} from '@angular/http';
@@ -24,7 +25,8 @@ import {HttpModule} from '@angular/http';
     GetSuccessComponent,
     GetComponent,
     SharingActivitiesComponent,
-    AnswerListComponent
+    AnswerListComponent,
+    AnswerComponent
   ],
   imports: [
     BrowserModule,
