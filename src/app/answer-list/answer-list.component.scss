@@ -17,15 +17,9 @@
   }
 }
 
-.answer1, .answer2, .answer3 {
+.answer1, .answer2, .answer3, .answer4 {
   @include bgImg('btn_abcd.png', 100% 100%);
   margin-bottom: 1rem;
-  padding: 1rem 2.2rem;
-  color: #ffffff;
-}
-
-.answer4 {
-  @include bgImg('btn_abcd.png', 100% 100%);
   padding: 1rem 2.2rem;
   color: #ffffff;
 }
