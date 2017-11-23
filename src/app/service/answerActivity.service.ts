@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {CreateWechatUserInfo, GetUserActivityRanking, UpdateUserInfo, ActivityRanking, GetRewardInfo} from './../entity/answerActivity';
-import {environment} from './../../environments/environment'
+import {CreateWechatUserInfo, GetUserActivityRanking, UpdateUserInfo, ActivityRanking, GetRewardInfo} from '../entity/answerActivity';
+import {environment} from '../../environments/environment';
 @Injectable()
 export class AnswerActivityService {
 
