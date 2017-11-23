@@ -8,7 +8,6 @@ import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
 
 import {AppComponent} from './app.component';
 import {IndexComponent} from './index/index.component';
-import {AddressComponent} from './address/address.component';
 import {RankingListComponent} from './ranking-list/ranking-list.component';
 import {GetSuccessComponent} from './get-success/get-success.component';
 import {GetComponent} from './get/get.component';
@@ -19,7 +18,6 @@ import {AnswerListComponent} from './answer-list/answer-list.component';
   declarations: [
     AppComponent,
     IndexComponent,
-    AddressComponent,
     RankingListComponent,
     GetSuccessComponent,
     GetComponent,
