@@ -1,0 +1,25 @@
+@mixin bgImg($name,$size) {
+  background: url('./../../../assets/img/' + $name) no-repeat;
+  background-size: $size;
+}
+
+.bigBox {
+  @include bgImg('page1_02.jpg', 100% 100%);
+}
+
+.question_bottom {
+  @include bgImg('page1_02_content2.png', 100% 100%);
+  min-height: 120px;
+  p {
+    font-weight: 900;
+    padding: 1rem;
+    font-size: 1.2rem;
+  }
+}
+
+.answer1, .answer2, .answer3, .answer4 {
+  @include bgImg('btn_abcd.png', 100% 100%);
+  margin-bottom: 1rem;
+  padding: 1rem 2.2rem;
+  color: #ffffff;
+}
