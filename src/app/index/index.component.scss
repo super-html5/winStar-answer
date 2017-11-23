@@ -4,6 +4,7 @@
 }
 
 .bg_blue {
+  background: #2bcdfc;
   .btn_startAnswer, .btn_rankingList, .currentRank {
     z-index: 99;
   }
@@ -17,7 +18,7 @@
   .btn_currentRank {
     @include location(20%, 18%)
   }
-  .btn_end{
+  .btn_end {
     width: 40%;
     @include location(30%, 18%)
   }
