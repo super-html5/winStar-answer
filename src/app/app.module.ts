@@ -13,6 +13,9 @@ import {GetComponent} from './get/get.component';
 import {SharingActivitiesComponent} from './sharing-activities/sharing-activities.component';
 import {AnswerListComponent} from './answer-list/answer-list.component';
 
+import {AnswerActivityService} from './service/answerActivity.service';
+import {HttpModule} from '@angular/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,9 +29,10 @@ import {AnswerListComponent} from './answer-list/answer-list.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
-  providers: [Title, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [Title, {provide: LocationStrategy, useClass: HashLocationStrategy}, AnswerActivityService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

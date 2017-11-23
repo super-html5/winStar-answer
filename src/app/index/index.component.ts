@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {flyIn} from '../animationsVariable';
-import {Data} from "@angular/router";
+import {AnswerActivityService} from './../service/answerActivity.service';
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -11,20 +11,25 @@ import {Data} from "@angular/router";
 export class IndexComponent implements OnInit {
   IsPastDate: boolean = false;
 
-  constructor(private title: Title) {
+  constructor(private title: Title,
+              private answerActivityService: AnswerActivityService) {
   }
 
   ngOnInit() {
     this.title.setTitle('加油优惠券');
     this.IsPC();
     this.IsPast();
+    this.getUserActivityRanking();
   }
 
 
   IsPC(): void {
-    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || /(Android)/i.test(navigator.userAgent)) {
+    if (
+      /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || /(Android)/i.test(navigator.userAgent)
+    ) {
       return;
-    } else {
+    }
+    else {
       // window.location.href = 'pc.html';
     }
   }
@@ -39,5 +44,11 @@ export class IndexComponent implements OnInit {
       alert('过期了！');
       this.IsPastDate = true;
     }
+  }
+
+  getUserActivityRanking(): void {
+    this.answerActivityService.getUserActivityRanking()
+      .then(res => console.log(res))
+      .catch(res => console.log(res));
   }
 }
