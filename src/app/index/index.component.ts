@@ -10,7 +10,7 @@ import {AnswerActivityService} from '../service/answerActivity.service';
 })
 export class IndexComponent implements OnInit {
   IsPastDate: boolean = false;
-  userRanking: string = '889222';
+  userRanking: string;
   isRanking: boolean = true;
 
   constructor(private title: Title,
@@ -60,11 +60,10 @@ export class IndexComponent implements OnInit {
     this.answerActivityService.getUserActivityRanking()
       .then(res => {
         // this.userRanking = res.result;
-        console.log(this.userRanking);
+        console.log(res);
         if (this.userRanking.length >= 5) {
           this.userRanking = '未上榜';
           this.isRanking = false;
-
         }
       })
       .catch(() => alert('当前服务器繁忙，请稍后再试！'));
