@@ -15,6 +15,7 @@ export class AnswerListComponent implements OnInit {
   questionInfoList: QuestionInfo[];
   questionInfo: QuestionInfo;
   _index: number = 0;
+  questionLength: number;
 
   constructor(private title: Title,
               private answerListService: AnswerListService) {
@@ -22,7 +23,7 @@ export class AnswerListComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('答题列表');
-    this.getQuestionList()
+    this.getQuestionList();
   }
 
   /**
@@ -33,6 +34,7 @@ export class AnswerListComponent implements OnInit {
       .then(res => {
         this.questionInfoList = res;
         this.questionInfo = this.questionInfoList[0];
+        this.questionLength = res.length;
       })
       .catch(res => {
         console.log(res);
@@ -45,7 +47,6 @@ export class AnswerListComponent implements OnInit {
   }
 
   onVoted(agreed: boolean) {
-    console.log(agreed);
     if (agreed) {
       this.chooseQuestion();
     } else {
