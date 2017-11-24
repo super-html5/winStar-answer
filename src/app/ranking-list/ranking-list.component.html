@@ -9,96 +9,13 @@
         <span class="float-left text-center">答题数</span>
       </div>
       <ul class="rank_list_name mt-1">
-        <li>
+        <li *ngFor="let rank of rankList, let i=index">
           <span class="float-left text-center">
-            <img class="align-middle" src="./assets/img/page2_1.png" alt="">
+            <img *ngIf="i < 3" class="align-middle" src='./assets/img/page2_{{i+1}}.png' alt="">
+            <span *ngIf="i >= 3">{{i+1}}</span>
           </span>
-          <span class="float-left text-center">马毅马育</span>
-          <span class="float-left text-center">99</span>
-        </li>
-        <li>
-          <span class="float-left text-center">
-            <img class="align-middle" src="./assets/img/page2_2.png" alt="">
-          </span>
-          <span class="float-left text-center">马毅马育</span>
-          <span class="float-left text-center">99</span>
-        </li>
-        <li>
-          <span class="float-left text-center">
-            <img class="align-middle" src="./assets/img/page2_3.png" alt="">
-          </span>
-          <span class="float-left text-center">马毅马育</span>
-          <span class="float-left text-center">99</span>
-        </li>
-        <li>
-          <span class="float-left text-center">
-            4
-          </span>
-          <span class="float-left text-center">马毅马育</span>
-          <span class="float-left text-center">99</span>
-        </li>
-        <li>
-          <span class="float-left text-center">
-            4
-          </span>
-          <span class="float-left text-center">马毅马育</span>
-          <span class="float-left text-center">99</span>
-        </li>
-        <li>
-          <span class="float-left text-center">
-            4
-          </span>
-          <span class="float-left text-center">马毅马育</span>
-          <span class="float-left text-center">99</span>
-        </li>
-        <li>
-          <span class="float-left text-center">
-            4
-          </span>
-          <span class="float-left text-center">马毅马育</span>
-          <span class="float-left text-center">99</span>
-        </li>
-        <li>
-          <span class="float-left text-center">
-            4
-          </span>
-          <span class="float-left text-center">马毅马育</span>
-          <span class="float-left text-center">99</span>
-        </li>
-        <li>
-          <span class="float-left text-center">
-            4
-          </span>
-          <span class="float-left text-center">马毅马育</span>
-          <span class="float-left text-center">99</span>
-        </li>
-        <li>
-          <span class="float-left text-center">
-            4
-          </span>
-          <span class="float-left text-center">马毅马育</span>
-          <span class="float-left text-center">99</span>
-        </li>
-        <li>
-          <span class="float-left text-center">
-            4
-          </span>
-          <span class="float-left text-center">马毅马育</span>
-          <span class="float-left text-center">99</span>
-        </li>
-        <li>
-          <span class="float-left text-center">
-            4
-          </span>
-          <span class="float-left text-center">马毅马育</span>
-          <span class="float-left text-center">99</span>
-        </li>
-        <li>
-          <span class="float-left text-center">
-            4
-          </span>
-          <span class="float-left text-center">马毅马育</span>
-          <span class="float-left text-center">99</span>
+          <span class="float-left text-center text-truncate px-1">{{rank.nickName}}</span>
+          <span class="float-left text-center">{{rank.highestScore}}</span>
         </li>
       </ul>
     </div>
