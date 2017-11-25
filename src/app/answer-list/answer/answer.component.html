@@ -1,5 +1,5 @@
 <div class="row bigBox" #bigBox>
-  <div class="col-10 mr-0 pr-0">
+  <div class="col-10 mr-0 pr-0 mb-4">
     <div class="progress mt-2">
       <div #progressBar class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar"
            style="width: 100%"
@@ -17,7 +17,7 @@
       <p>{{_index+1}}.{{_questionInfo?.title}}</p>
     </div>
   </div>
-  <div class="col-12">
+  <div class="col-12 mt-4">
     <div class="answer1" (click)="chooseOne('A')">
       {{_questionInfo?.optionA}}
     </div>
@@ -32,5 +32,10 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="showShade" (click)="hiddenShade()" class="addr-success position-fixed">
+  <img src="./assets/img/button-confirm.png" alt="">
+</div>
+<div *ngIf="showShade" class="shade position-fixed"></div>
 
 

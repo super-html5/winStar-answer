@@ -10,10 +10,11 @@
 .question_bottom {
   @include bgImg('page1_02_content2.png', 100% 100%);
   min-height: 120px;
+  margin-top: -1px;
   p {
     font-weight: 900;
     padding: 1rem;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 }
 
@@ -22,4 +23,33 @@
   margin-bottom: 1rem;
   padding: 1rem 2.2rem;
   color: #ffffff;
+}
+
+/*前50名领取成功透明层*/
+.addr-success {
+  width: 80%;
+  left: 10%;
+  top: 20%;
+  height: 60%;
+  z-index: 101;
+  background: url("../../../assets/img/page-addr-success.png") no-repeat center;
+  background-size: 100%;
+  img {
+    position: absolute;
+    width: 80%;
+    left: 10%;
+    bottom: 12%;
+  }
+}
+
+.shade {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: rgba(0, 0, 0, .7);
+  z-index: 100;
 }

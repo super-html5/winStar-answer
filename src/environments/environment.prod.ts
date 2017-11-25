@@ -31,7 +31,7 @@ export const environment = {
   /**
    * 获取全部题库
    */
-  answerList: '/wechat_access/api/v1/activity/noauth/answer/saveAnswerQuestionRecord',
+  answerList: '/wechat_access/api/v1/activity/noauth/answer/questions',
   /**
    * 保存答题分数
    */
@@ -39,5 +39,5 @@ export const environment = {
   /**
    * 保存答题日志
    */
-  questionLog: '/wechat_access/api/v1/activity/noauth/answer/saveAnswerQuestionRecord'
+  questionLog: '/wechat_access/api/v1/activity/noauth/answer/saveAnswerQuestionLog'
 };

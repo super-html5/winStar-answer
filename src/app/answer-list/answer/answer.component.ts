@@ -1,8 +1,6 @@
 import {
   Component,
   OnInit,
-  OnChanges,
-  AfterContentChecked,
   ViewChild,
   ElementRef,
   Input,
@@ -10,48 +8,54 @@ import {
   EventEmitter
 } from '@angular/core';
 import {QuestionInfo} from '../../entity/answerActivity';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-answer',
   templateUrl: './answer.component.html',
   styleUrls: ['./answer.component.scss']
 })
-export class AnswerComponent implements OnInit, OnChanges, AfterContentChecked {
+export class AnswerComponent implements OnInit {
+  /**
+   * 单个题库实体
+   */
   _questionInfo: QuestionInfo;
+  /**
+   * 倒计时时间初始化
+   * @type {number}
+   * @private
+   */
   _timer: number = 15;
+  /**
+   * 倒计时条儿定时器
+   */
   _progressBar: any;
+  /**
+   * 倒计时时间定时器
+   */
   _progressBarTimer: any;
+  /**
+   * 题库下标
+   */
   _index: number;
+  /**
+   * 题库总长度
+   */
   _questionLength: number;
+
   @ViewChild('bigBox') bigBox: ElementRef;
   @ViewChild('progressBar') progressBar: ElementRef;
   @Output() onVoted = new EventEmitter<boolean>();
 
-  constructor() {
+  showShade: boolean = false;
+
+  constructor(private router: Router) {
 
   }
 
   ngOnInit() {
-    //this.bigBoxHeight();
     this.onProgressBarInit();
     this.remainingTimer();
-  }
-
-  ngOnChanges() {
-    // setTimeout(() => {
-    //   const a_height = 0;
-    //   let b_height = 0;
-    //
-    //   if (b_height >= a_height) {
-    //     this.bigBox.nativeElement.style.height = b_height + 'px';
-    //   } else {
-    //     this.bigBox.nativeElement.style.height = a_height + 'px';
-    //   }
-    // }, 1000);
-  }
-
-  ngAfterContentChecked() {
-
   }
 
   /**
@@ -133,14 +137,6 @@ export class AnswerComponent implements OnInit, OnChanges, AfterContentChecked {
     }, 1000);
   }
 
-  /**
-   * 获取页面高度
-   */
-  bigBoxHeight(): void {
-
-
-  }
-
   chooseOne(answer: string): void {
     if (this._index === this._questionLength) {
       // todo 此处需要弹窗提示，已经回答全部题库，结束答题
@@ -149,9 +145,14 @@ export class AnswerComponent implements OnInit, OnChanges, AfterContentChecked {
     if (answer === this._questionInfo.answer) {
       this.onVoted.emit(true);
     } else {
-      this.onVoted.emit(false);
-      // todo 此处需要弹窗提示答题错误
+      clearInterval(this._progressBarTimer);
+      clearInterval(this._progressBar);
+      this.showShade = true;
       return;
     }
+  }
+
+  hiddenShade(): void {
+    this.router.navigate(['/index']);
   }
 }

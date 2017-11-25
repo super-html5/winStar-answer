@@ -1,4 +1,4 @@
-<app-answer [QuestionInfo]="questionInfo"
+<app-answer *ngIf="questionInfo" [QuestionInfo]="questionInfo"
             (onVoted)="onVoted($event)"
             [Index]="_index"
             [QuestionLength]="questionLength"
