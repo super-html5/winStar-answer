@@ -92,8 +92,8 @@ export class AnswerActivityService {
    * @returns {Promise<TResult|TResult2|TResult1>}
    */
   receive(mobile: string): Promise<any> {
-    const receiveUrl = `${environment.receive}?mobile=mobile`;
-    return this.http.post(receiveUrl, {headers: this.openidHeaders})
+    const receiveUrl = `${environment.receive}?mobile=${mobile}`;
+    return this.http.post(receiveUrl, '', {headers: this.openidHeaders})
       .toPromise()
       .then(res => res.json())
       .catch();
