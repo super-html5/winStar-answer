@@ -95,7 +95,7 @@ export class AnswerActivityService {
     const receiveUrl = `${environment.receive}?mobile=${mobile}`;
     return this.http.post(receiveUrl, '', {headers: this.openidHeaders})
       .toPromise()
-      .then(res => res.json())
+      .then(res => res.json() as any)
       .catch();
 
   }

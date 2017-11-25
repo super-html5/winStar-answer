@@ -149,11 +149,16 @@ export class GetComponent implements OnInit {
         })
         .catch(res => {
           console.log(res);
-          if (JSON.parse(res._body) === 'rewardHasBeenReceived.answer.activity.NotRule') {
-            alert('奖品已被领取！');
-          } else if (JSON.parse(res._body) === 'rewardInfo.answer.activity.NotFound') {
+          if (JSON.parse(res._body).code === 'rewardHasBeenReceived.answer.activity.NotRule') {
+            alert('该奖品已被领取！');
+          } else if (JSON.parse(res._body).code === 'rewardInfoNotExist.answer.activity') {
             alert('暂无奖品信息');
+          } else if (JSON.parse(res._body).code === 'coupons.AuthFail') {
+            alert('该手机号已领取过奖品！');
           }
+          /*  else if (JSON.parse(res._body).code === 'rewardInfo.answer.activity.NotFound') {
+           alert('暂无奖品信息');
+           } */
         });
     }
   }
