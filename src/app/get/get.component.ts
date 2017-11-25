@@ -12,6 +12,7 @@ export class GetComponent implements OnInit {
   userRanking: number;
   showShade: boolean = false;
   pageReward: string;
+  source: number;
 
   constructor(private title: Title,
               private answerActivityService: AnswerActivityService,
@@ -30,20 +31,21 @@ export class GetComponent implements OnInit {
       .then(res => {
         console.log(res);
         this.ranking = res.ranking;
-        this.ranking = 20;
+        // this.ranking = 120;
         this.userRanking = res.ranking;
         if (res.reward = '警察公仔摆件一个') {
           this.pageReward = './assets/img/page-address3.png';
-        }else if (res.reward = '双肩包一个') {
+        } else if (res.reward = '双肩包一个') {
+          this.source = 2;
           this.pageReward = './assets/img/page-address1.png';
         }
         this.isWin();
       })
       .catch(res => {
         console.log(res);
-       if (JSON.parse(res._body).code === 'activityNotOver.answer.activity.NotRule') {
-         alert('活动尚未结束，没法获去奖品。');
-       }
+        if (JSON.parse(res._body).code === 'activityNotOver.answer.activity.NotRule') {
+          alert('活动尚未结束，没法获去奖品。');
+        }
       });
   }
 
@@ -52,19 +54,32 @@ export class GetComponent implements OnInit {
    * 及title
    */
   isWin(): void {
-    if (this.ranking <= 50) {
-      this.ranking = 50;
-      this.title.setTitle('我要领奖');
+    if (this.source === 2) {
+      if (this.ranking <= 200) {
+        this.ranking = 50;
+        this.title.setTitle('我要领奖');
+      } else if (this.ranking > 200) {
+        this.ranking = 201;
+        this.title.setTitle('未中奖');
+        return;
+      }
       return;
-    } else if (this.ranking > 50 && this.ranking <= 200) {
-      this.ranking = 200;
-      this.title.setTitle('我要领奖');
-      return;
-    } else if (this.ranking > 200) {
-      this.ranking = 201;
-      this.title.setTitle('未中奖');
-      return;
+    } else {
+      if (this.ranking <= 50) {
+        this.ranking = 50;
+        this.title.setTitle('我要领奖');
+        return;
+      } else if (this.ranking > 50 && this.ranking <= 200) {
+        this.ranking = 200;
+        this.title.setTitle('我要领奖');
+        return;
+      } else if (this.ranking > 200) {
+        this.ranking = 201;
+        this.title.setTitle('未中奖');
+        return;
+      }
     }
+
   }
 
   /**
@@ -136,7 +151,7 @@ export class GetComponent implements OnInit {
           console.log(res);
           if (JSON.parse(res._body) === 'rewardHasBeenReceived.answer.activity.NotRule') {
             alert('奖品已被领取！');
-          }else if (JSON.parse(res._body) === 'rewardInfo.answer.activity.NotFound') {
+          } else if (JSON.parse(res._body) === 'rewardInfo.answer.activity.NotFound') {
             alert('暂无奖品信息');
           }
         });
