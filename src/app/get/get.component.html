@@ -4,37 +4,38 @@
     <div *ngSwitchCase="50" class="bigBox">
 
       <div class="w-100 page-addr-top position-relative">
-        <img class="w-100 page-address1" src="./assets/img/page-address1.png" alt="">
-        <p class="position-absolute page-rank text-center">您的名次为<span class="px-1">150</span>名</p>
+        <img class="w-100 page-address1" [src]="pageReward" alt="">
+        <p class="position-absolute page-rank text-center">您的名次为<span class="px-1">{{userRanking}}</span>名</p>
       </div>
 
       <div class="page-addr-content py-3">
-        <input class="pl-2 py-2 w-100" type="text" placeholder="姓名">
-        <input class="pl-2 py-2 mt-2 w-100" type="tel" placeholder="电话">
-        <textarea class="w-100 pl-2 py-2 mt-2 mb-3 align-middle" name="" placeholder="地址"></textarea>
+        <input #name name="name" class="pl-2 py-2 w-100" type="text" placeholder="姓名">
+        <input #tel name="tel" class="pl-2 py-2 mt-2 w-100" maxlength="11" type="tel" placeholder="电话">
+        <textarea #address name="address" class="w-100 pl-2 py-2 mt-2 mb-3 align-middle" placeholder="地址"></textarea>
       </div>
       <div>
-        <img (click)="affirm()" class="w-75 mt-5 btn_affirm" src="./assets/img/btn_affirm.png" alt="">
+        <img (click)="affirm(name.value,tel.value,address.value)" class="w-75 mt-5 btn_affirm" src="./assets/img/btn_affirm.png" alt="">
       </div>
 
     </div>
     <div *ngSwitchCase="200" class="w-100 position-relative">
-      <img class="page-get" src="./assets/img/page-get.png" alt="">
-      <input class="position-absolute page-get-input text-center py-2" type="tel" maxlength="11"
-             placeholder="请输入手机号，领取优惠券">
-      <img class="w-75 mt-5 btn_affirm" src="./assets/img/btn_affirm.png" alt="">
-    </div>
+      <div class="w-100 page-get-top position-relative">
+        <img class="w-100 page-get" src="./assets/img/page-get.png" alt="">
+        <p class="position-absolute page-get-rank text-center">您的名次为<span class="px-1">{{userRanking}}</span>名</p>
+      </div>
 
-    <div *ngSwitchDefault class="w-100">
+      <input #couponTel class="position-absolute page-get-input text-center py-2" type="tel" maxlength="11"
+             placeholder="请输入手机号，领取优惠券">
+      <img (click)="toLinkSuccess(couponTel.value)" class="w-75 mt-5 btn_affirm" src="./assets/img/btn_affirm.png" alt="">
+    </div>
+    <div *ngSwitchCase="201" class="w-100">
       <img class="page-get-notWin" src="./assets/img/page-get-notWin.png" alt="">
       <img class="w-75 mt-5 btn_affirm" src="./assets/img/btn_affirm.png" alt="">
     </div>
-
   </div>
 </div>
-<div *ngIf="showShade" (click)="hiddenShade()" class="addr-success position-fixed">
-  <img src="./assets/img/page-addr-success.png" alt="">
-  <img src="./assets/img/button-confirm.png" alt="">
-
+<div *ngIf="showShade" (click)="hiddenShade()" class="addr-success position-fixed h-100">
+  <img class="position-absolute" src="./assets/img/page-addr-success.png" alt="">
+  <img class="position-absolute" src="./assets/img/button-confirm.png" alt="">
 </div>
-<div *ngIf="showShade" class="shade position-fixed"></div>
+<div *ngIf="showShade" class="w-100 shade position-fixed"></div>
