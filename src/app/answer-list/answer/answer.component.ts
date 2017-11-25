@@ -49,6 +49,9 @@ export class AnswerComponent implements OnInit {
 
   showShade: boolean = false;
 
+  _alertStr: string;
+  _alertBtnStr: string;
+
   constructor(private router: Router) {
 
   }
@@ -133,6 +136,7 @@ export class AnswerComponent implements OnInit {
       this._timer -= 1;
       if (this._timer === 0) {
         clearInterval(this._progressBarTimer);
+        this.imgAlert(2);
       }
     }, 1000);
   }
@@ -140,6 +144,7 @@ export class AnswerComponent implements OnInit {
   chooseOne(answer: string): void {
     if (this._index === this._questionLength) {
       // todo 此处需要弹窗提示，已经回答全部题库，结束答题
+      this.imgAlert(3);
       return;
     }
     if (answer === this._questionInfo.answer) {
@@ -147,9 +152,28 @@ export class AnswerComponent implements OnInit {
     } else {
       clearInterval(this._progressBarTimer);
       clearInterval(this._progressBar);
-      this.showShade = true;
+      this.imgAlert(1);
       return;
     }
+  }
+
+  /**
+   * 弹出框
+   * @param {number} flag 1:错误 2：超时 3：全部答对
+   * @private
+   */
+  imgAlert(flag: number): void {
+    if (flag === 1) {
+      this._alertStr = 'error-img';
+      this._alertBtnStr = 'again.png';
+    } else if (flag === 2) {
+      this._alertStr = 'time-over';
+      this._alertBtnStr = 'again.png';
+    } else if (flag === 3) {
+      this._alertStr = 'allRight-img';
+      this._alertBtnStr = 'ok.png'
+    }
+    this.showShade = true;
   }
 
   hiddenShade(): void {

@@ -25,21 +25,44 @@
   color: #ffffff;
 }
 
-/*前50名领取成功透明层*/
-.addr-success {
+/*答题错误*/
+.error-img {
   width: 80%;
   left: 10%;
   top: 20%;
   height: 60%;
   z-index: 101;
-  background: url("../../../assets/img/page-addr-success.png") no-repeat center;
+  background: url("../../../assets/img/answer/error-img.png") no-repeat center;
   background-size: 100%;
-  img {
-    position: absolute;
-    width: 80%;
-    left: 10%;
-    bottom: 12%;
-  }
+}
+
+/*答题错误*/
+.allRight-img {
+  width: 80%;
+  left: 10%;
+  top: 20%;
+  height: 60%;
+  z-index: 101;
+  background: url("../../../assets/img/answer/allRight-img.png") no-repeat center;
+  background-size: 100%;
+}
+
+/*答题错误*/
+.time-over {
+  width: 80%;
+  left: 10%;
+  top: 20%;
+  height: 60%;
+  z-index: 101;
+  background: url("../../../assets/img/answer/time-over.png") no-repeat center;
+  background-size: 100%;
+}
+
+.bt-img {
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  bottom: 12%;
 }
 
 .shade {

@@ -33,8 +33,8 @@
   </div>
 </div>
 
-<div *ngIf="showShade" (click)="hiddenShade()" class="addr-success position-fixed">
-  <img src="./assets/img/button-confirm.png" alt="">
+<div *ngIf="showShade" class="{{_alertStr}} position-fixed">
+  <img class="bt-img" (click)="hiddenShade()" src="./assets/img/answer/{{_alertBtnStr}}" alt="">
 </div>
 <div *ngIf="showShade" class="shade position-fixed"></div>
 
