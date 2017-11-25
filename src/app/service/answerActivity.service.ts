@@ -12,6 +12,7 @@ export class AnswerActivityService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private openidHeaders = new Headers({'Content-Type': 'application/json', 'openid': 'olQf5t6N3ZdQNf9bB5BZ3r__KDz4'});
+  private source = 1;
 
   /**
    * 创建用户信息
@@ -19,10 +20,10 @@ export class AnswerActivityService {
    * @param source
    * @returns {Promise<TResult|TResult2|CreateWechatUserInfo>}
    */
-  createWechatUserInfo(openid: string, source: number): Promise<CreateWechatUserInfo> {
+  createWechatUserInfo(openid: string, nickname: string): Promise<CreateWechatUserInfo> {
     const createUserInfoUrl = environment.createWechatUserInfo;
     return this.http
-      .post(createUserInfoUrl, JSON.stringify({'openid': openid, 'source': source}), {headers: this.headers})
+      .post(createUserInfoUrl, JSON.stringify({'openid': openid, 'source': this.source, nickName: nickname}), {headers: this.headers})
       .toPromise()
       .then(res => res.json() as CreateWechatUserInfo)
       .catch();
@@ -37,11 +38,11 @@ export class AnswerActivityService {
    * @param source
    * @returns {Promise<TResult|TResult2|UpdateUserInfo>}
    */
-  updateUserInfo(address: string, mobile: string, name: string, reqParam: number, source: number): Promise<UpdateUserInfo> {
+  updateUserInfo(address: string, mobile: string, name: string): Promise<UpdateUserInfo> {
     const updateUserInfoUrl = environment.updateUserInfo;
     return this.http.post(updateUserInfoUrl,
-      {'address': address, 'mobile': mobile, 'name': name, 'reqParam': reqParam, 'source': source},
-      {headers: this.headers}
+      {'address': address, 'mobile': mobile, 'name': name, 'source': this.source},
+      {headers: this.openidHeaders}
     )
       .toPromise()
       .then(res => res.json() as UpdateUserInfo)
@@ -52,8 +53,8 @@ export class AnswerActivityService {
    * 排行榜信息
    * @returns {Promise<TResult|TResult2|ActivityRanking>}
    */
-  getActivityRanking(source: number): Promise<ActivityRanking> {
-    const activityRankingUrl = `${environment.getActivityRanking}?source=source`;
+  getActivityRanking(): Promise<ActivityRanking> {
+    const activityRankingUrl = `${environment.getActivityRanking}?source=${this.source}`;
     return this.http.get(activityRankingUrl, {headers: this.openidHeaders})
       .toPromise()
       .then(res => res.json() as ActivityRanking)
@@ -104,8 +105,8 @@ export class AnswerActivityService {
    * @param result
    * @returns {Promise<TResult|TResult2|TResult1>}
    */
-  activityInfo(result: string): Promise<any> {
-    const activityInfoUrl = `${environment.info}?result=result`;
+  activityInfo(): Promise<any> {
+    const activityInfoUrl = environment.info;
     return this.http.get(activityInfoUrl, {headers: this.openidHeaders})
       .toPromise()
       .then(res => res.json())
