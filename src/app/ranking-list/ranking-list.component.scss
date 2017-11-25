@@ -42,11 +42,13 @@
       height: 50px;
       line-height: 50px;
       border-top: 1px solid #eee;
+      &:last-child{
+        border-bottom: 1px solid #eee;
+      }
       span {
         width: 33.3%;
         img {
           width: 22%;
-
         }
       }
     }

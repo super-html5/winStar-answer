@@ -20,52 +20,58 @@ export class IndexComponent implements OnInit {
   ngOnInit() {
     this.title.setTitle('加油优惠券');
     this.IsPC();
-    this.IsPast();
-    this.createWechatUserInfo();
-    this.getUserActivityRanking();
   }
 
 
   IsPC(): void {
-    if (
-      /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || /(Android)/i.test(navigator.userAgent)
-    ) {
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || /(Android)/i.test(navigator.userAgent)) {
+      this.createWechatUserInfo();
+      this.getUserActivityRanking();
+      this.activityInfo();
       return;
     } else {
       window.location.href = 'pc.html';
     }
   }
 
-  IsPast() {
-    const thetime = '2017-12-1';
-    const activityDate = new Date(Date.parse(thetime.replace(/-/g, '/')));
-    if (activityDate > new Date()) {
-      // alert('没过期！');
-      return;
-    } else {
-      // alert('过期了！');
-      this.IsPastDate = true;
-    }
-  }
-
+  /**
+   * 创建用户信息
+   */
   createWechatUserInfo(): void {
-    this.answerActivityService.createWechatUserInfo('olQf5t6N3ZdQNf9bB5BZ3r__KDz4', 1)
+    this.answerActivityService.createWechatUserInfo('olQf5t6N3ZdQNf9bB5BZ3r__KDz4', '朱燕妮')
       .then(res => {
         console.log(res);
+        localStorage.setItem('_openid', res.openid );
       })
       .catch(res => console.log(res));
   }
 
+  /**
+   * 用户当前排名
+   */
   getUserActivityRanking(): void {
     this.answerActivityService.getUserActivityRanking()
       .then(res => {
-        // this.userRanking = res.result;
-        console.log(res);
+        this.userRanking = res.result;
         if (this.userRanking.length >= 5) {
           this.userRanking = '未上榜';
           this.isRanking = false;
         }
       })
-      .catch(() => alert('当前服务器繁忙，请稍后再试！'));
+      .catch(res => console.log(res));
+  }
+
+  /**
+   * 获取活动状态
+   */
+  activityInfo(): void {
+    this.answerActivityService.activityInfo()
+      .then(res => {
+        console.log(res);
+        if (res.result === 'OFF') {
+          this.IsPastDate = true;
+        }
+      })
+      .catch(res => console.log(res));
   }
 }
