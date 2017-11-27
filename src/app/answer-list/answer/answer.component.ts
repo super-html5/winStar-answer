@@ -146,10 +146,9 @@ export class AnswerComponent implements OnInit {
     this._progressBarTimer = setInterval(() => {
       this._timer -= 1;
       if (this._timer === 0) {
-        this.saveUserRecord(0);
         this._endTime = new Date().getTime().toString();
+        this.saveUserRecord(0,2);
         clearInterval(this._progressBarTimer);
-        this.imgAlert(2);
       }
     }, 1000);
   }
@@ -162,19 +161,17 @@ export class AnswerComponent implements OnInit {
     if (answer === this._questionInfo.answer) {
       if (this._index === this._questionLength) {
         this._endTime = new Date().getTime().toString();
-        this.saveUserRecord(1);
+        this.saveUserRecord(1,3);
         clearInterval(this._progressBarTimer);
         clearInterval(this._progressBar);
-        this.imgAlert(3);
         return;
       }
       this.onVoted.emit(true);
     } else {
       this._endTime = new Date().getTime().toString();
-      this.saveUserRecord(0);
+      this.saveUserRecord(0,1);
       clearInterval(this._progressBarTimer);
       clearInterval(this._progressBar);
-      this.imgAlert(1);
       return;
     }
   }
@@ -196,7 +193,7 @@ export class AnswerComponent implements OnInit {
   /**
    * 保存答题分数
    */
-  saveUserRecord(isUp: number): void {
+  saveUserRecord(isUp: number, flag: number): void {
     let _record = 0;
     if (isUp === 1) {
       _record = this._index + 1;
@@ -205,7 +202,7 @@ export class AnswerComponent implements OnInit {
     }
     this.answerListService.saveUserRecord(this._startTime, this._endTime, _record.toString())
       .then(res => {
-        console.log(res);
+        this.imgAlert(flag);
       }).catch(res => {
       console.log(res);
     })
