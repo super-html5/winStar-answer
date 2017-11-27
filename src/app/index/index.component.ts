@@ -22,7 +22,7 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title.setTitle('加油优惠券');
+    this.title.setTitle('答题');
     this.IsPC();
   }
 
