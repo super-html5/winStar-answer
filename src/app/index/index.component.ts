@@ -59,13 +59,17 @@ export class IndexComponent implements OnInit {
   getUserActivityRanking(): void {
     this.answerActivityService.getUserActivityRanking()
       .then(res => {
+        console.log(res);
         this.userRanking = res.result;
         if (this.userRanking.length >= 5) {
           this.userRanking = '未上榜';
           this.isRanking = false;
         }
       })
-      .catch(res => console.log(res));
+      .catch(() => {
+        this.userRanking = '未上榜';
+        this.isRanking = false;
+      });
   }
 
   /**

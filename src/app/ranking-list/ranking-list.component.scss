@@ -13,7 +13,7 @@
 }
 
 .rank_list {
-  height: 77%;
+  height: 75%;
   width: 84%;
   z-index: 99;
   margin-left: 8%;
@@ -35,12 +35,12 @@
     clear: both;
     margin: 0;
     padding: 0;
-    height: 90%;
+    height: 88%;
     list-style-type: none;
     overflow: scroll;
     > li {
-      height: 50px;
-      line-height: 50px;
+      height: 44px;
+      line-height: 44px;
       border-top: 1px solid #eee;
       &:last-child{
         border-bottom: 1px solid #eee;
