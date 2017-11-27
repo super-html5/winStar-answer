@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 import {AppComponent} from './app.component';
 import {IndexComponent} from './index/index.component';
@@ -36,7 +37,8 @@ import {HttpModule} from '@angular/http';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [
     Title,

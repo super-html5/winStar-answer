@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
+import {Router} from '@angular/router';
 import {flyIn} from '../animationsVariable';
 import {AnswerActivityService} from '../service/answerActivity.service';
 @Component({
@@ -14,7 +15,8 @@ export class IndexComponent implements OnInit {
   isRanking: boolean = true;
 
   constructor(private title: Title,
-              private answerActivityService: AnswerActivityService) {
+              private answerActivityService: AnswerActivityService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -30,7 +32,7 @@ export class IndexComponent implements OnInit {
       this.activityInfo();
       return;
     } else {
-      window.location.href = 'pc.html';
+      this.router.navigate(['pcHint']);
     }
   }
 
@@ -41,7 +43,7 @@ export class IndexComponent implements OnInit {
     this.answerActivityService.createWechatUserInfo('olQf5t6N3ZdQNf9bB5BZ3r__KDz4', '朱燕妮')
       .then(res => {
         console.log(res);
-        localStorage.setItem('_openid', res.openid );
+        localStorage.setItem('_openid', res.openid);
       })
       .catch(res => console.log(res));
   }

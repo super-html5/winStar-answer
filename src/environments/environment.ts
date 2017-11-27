@@ -14,6 +14,10 @@ export const environment = {
    */
   updateUserInfo: '/wechatApi-ng4/api/v1/activity/noauth/answer/userInfo/updateWechatUserInfo',
   /**
+   * 获取用户信息接口,判断是否已领取过实物奖
+   */
+  getUserInfoUrl: '/wechatApi-ng4/api/v1/activity/noauth/answer/userInfo/getWechatUserInfo',
+  /**
    * 排行榜信息
    */
   getActivityRanking: '/wechatApi-ng4/api/v1/activity/noauth/answer/answerRecord/getActivityRanking',

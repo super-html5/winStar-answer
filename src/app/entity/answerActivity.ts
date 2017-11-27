@@ -64,6 +64,19 @@ export class GetRewardInfo {
   reward: string;
 }
 
+export class GetWechatUserInfo {
+  id: string;
+  accountId: string;
+  activityId: string;
+  openid: string;
+  source: number;
+  nickName: string;
+  name: string;
+  mobile: string;
+  address: string;
+  createTime: number;
+  updateTime: number;
+}
 
 export class QuestionInfo {
   activityId: string;// 活动ID
