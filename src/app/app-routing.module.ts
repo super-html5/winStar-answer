@@ -6,6 +6,7 @@ import {AnswerListComponent} from './answer-list/answer-list.component';
 import {GetComponent} from './get/get.component';
 import {GetSuccessComponent} from './get-success/get-success.component';
 import {RankingListComponent} from './ranking-list/ranking-list.component';
+import {PcHintComponent} from './pc-hint/pc-hint.component';
 import {SharingActivitiesComponent} from './sharing-activities/sharing-activities.component';
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'index'},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'get', component: GetComponent},
   {path: 'success', component: GetSuccessComponent},
   {path: 'rankingList', component: RankingListComponent},
-  {path: 'sharing', component: SharingActivitiesComponent}
+  {path: 'sharing', component: SharingActivitiesComponent},
+  {path: 'pcHint', component: PcHintComponent},
 
 ];
 

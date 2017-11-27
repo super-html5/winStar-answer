@@ -13,7 +13,7 @@ import {GetComponent} from './get/get.component';
 import {SharingActivitiesComponent} from './sharing-activities/sharing-activities.component';
 import {AnswerListComponent} from './answer-list/answer-list.component';
 import {AnswerComponent} from './answer-list/answer/answer.component';
-
+import {PcHintComponent} from './pc-hint/pc-hint.component';
 
 import {AnswerActivityService} from './service/answerActivity.service';
 import {AnswerListService} from './service/answerList.service';
@@ -29,7 +29,8 @@ import {HttpModule} from '@angular/http';
     GetComponent,
     SharingActivitiesComponent,
     AnswerListComponent,
-    AnswerComponent
+    AnswerComponent,
+    PcHintComponent
   ],
   imports: [
     BrowserModule,
