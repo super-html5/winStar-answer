@@ -13,6 +13,7 @@ export class IndexComponent implements OnInit {
   IsPastDate: boolean = false;
   userRanking: string;
   isRanking: boolean = true;
+  onOrOff: string = './assets/img/home-page_02.jpg';
 
   constructor(private title: Title,
               private answerActivityService: AnswerActivityService,
@@ -72,6 +73,7 @@ export class IndexComponent implements OnInit {
         console.log(res);
         if (res.result === 'OFF') {
           this.IsPastDate = true;
+          this.onOrOff = './assets/img/home-page_02_off.jpg';
         }
       })
       .catch(res => console.log(res));

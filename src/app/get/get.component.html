@@ -5,23 +5,25 @@
 
       <div class="w-100 page-addr-top position-relative">
         <img class="w-100 page-address1" [src]="pageReward" alt="">
-        <p class="position-absolute page-rank text-center">您的名次为<span class="px-1">{{userRanking}}</span>名</p>
+        <p class="position-absolute page-rank text-center">您的名次为第<span class="px-1">{{userRanking}}</span>名</p>
       </div>
-
-      <div class="page-addr-content py-3">
-        <input #name name="name" class="pl-2 py-2 w-100" type="text" placeholder="姓名">
-        <input #tel name="tel" class="pl-2 py-2 mt-2 w-100" maxlength="11" type="tel" placeholder="电话">
-        <textarea #address name="address" class="w-100 pl-2 py-2 mt-2 mb-3 align-middle" placeholder="地址"></textarea>
+      <div class="page-addr-content py-3" *ngIf="inputValue">
+        <input [disabled]="isDisabled" [(ngModel)]="inputValue.name" #name name="name" class="pl-2 py-2 w-100" type="text" placeholder="姓名">
+        <input [disabled]="isDisabled" [(ngModel)]="inputValue.mobile" #tel name="tel" class="pl-2 py-2 mt-2 w-100" maxlength="11" type="tel"
+               placeholder="电话">
+        <textarea [disabled]="isDisabled" [(ngModel)]="inputValue.address" #address name="address" class="w-100 pl-2 py-2 mt-2 mb-3 align-middle"
+                  placeholder="地址"></textarea>
       </div>
-      <div>
-        <img (click)="affirm(name.value,tel.value,address.value)" class="w-75 mt-5 btn_affirm" src="./assets/img/btn_affirm.png" alt="">
+      <div *ngIf="!isDisabled">
+        <img (click)="affirm(
+        inputValue.name,inputValue.mobile,inputValue.address)" class="w-75 mt-5 btn_affirm" src="./assets/img/btn_affirm.png" alt="">
       </div>
 
     </div>
     <div *ngSwitchCase="200" class="w-100 position-relative">
       <div class="w-100 page-get-top position-relative">
         <img class="w-100 page-get" src="./assets/img/page-get.png" alt="">
-        <p class="position-absolute page-get-rank text-center">您的名次为<span class="px-1">{{userRanking}}</span>名</p>
+        <p class="position-absolute page-get-rank text-center">您的名次为第<span class="px-1">{{userRanking}}</span>名</p>
       </div>
 
       <input #couponTel class="position-absolute page-get-input text-center py-2" type="tel" maxlength="11"

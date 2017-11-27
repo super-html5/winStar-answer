@@ -1,7 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {CreateWechatUserInfo, GetUserActivityRanking, UpdateUserInfo, ActivityRanking, GetRewardInfo} from '../entity/answerActivity';
+import {
+  CreateWechatUserInfo,
+  GetUserActivityRanking,
+  UpdateUserInfo,
+  ActivityRanking,
+  GetRewardInfo,
+  GetWechatUserInfo
+} from '../entity/answerActivity';
 import {environment} from '../../environments/environment';
 @Injectable()
 export class AnswerActivityService {
@@ -38,7 +45,7 @@ export class AnswerActivityService {
    * @param source
    * @returns {Promise<TResult|TResult2|UpdateUserInfo>}
    */
-  updateUserInfo(address: string, mobile: string, name: string): Promise<UpdateUserInfo> {
+  updateUserInfo(name: string, mobile: string, address: string): Promise<UpdateUserInfo> {
     const updateUserInfoUrl = environment.updateUserInfo;
     return this.http.post(updateUserInfoUrl,
       {'address': address, 'mobile': mobile, 'name': name, 'source': this.source},
@@ -46,6 +53,18 @@ export class AnswerActivityService {
     )
       .toPromise()
       .then(res => res.json() as UpdateUserInfo)
+      .catch();
+  }
+
+  /**
+   * 判断是否领取过实物奖
+   * @returns {Promise<TResult|TResult2|GetWechatUserInfo>}
+   */
+  getWechatUserInfo(): Promise<GetWechatUserInfo> {
+    const getUserInfoUrl = environment.getUserInfoUrl;
+    return this.http.post(getUserInfoUrl, '', {headers: this.openidHeaders})
+      .toPromise()
+      .then(res => res.json() as GetWechatUserInfo)
       .catch();
   }
 

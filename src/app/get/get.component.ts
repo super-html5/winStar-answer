@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {AnswerActivityService} from '../service/answerActivity.service';
+import {GetWechatUserInfo} from '../entity/answerActivity';
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-get',
@@ -13,6 +14,9 @@ export class GetComponent implements OnInit {
   showShade: boolean = false;
   pageReward: string;
   source: number;
+  isDisabled: boolean = true;
+  isClick: boolean = false;
+  inputValue: GetWechatUserInfo;
 
   constructor(private title: Title,
               private answerActivityService: AnswerActivityService,
@@ -20,7 +24,23 @@ export class GetComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getWechatUserInfo();
     this.getRewardInfo();
+  }
+
+  /**
+   * 判断是否领取过实物奖
+   */
+  getWechatUserInfo(): void {
+    this.answerActivityService.getWechatUserInfo()
+      .then(res => {
+        console.log(res);
+        this.inputValue = res;
+        if (!res.mobile) {
+          this.isDisabled = false;
+        }
+      })
+      .catch(res => console.log(res));
   }
 
   /**
@@ -31,7 +51,7 @@ export class GetComponent implements OnInit {
       .then(res => {
         console.log(res);
         this.ranking = res.ranking;
-        // this.ranking = 120;
+        // this.ranking = 20;
         this.userRanking = res.ranking;
         if (res.reward = '警察公仔摆件一个') {
           this.pageReward = './assets/img/page-address3.png';
@@ -54,7 +74,7 @@ export class GetComponent implements OnInit {
    * 及title
    */
   isWin(): void {
-    if (this.source === 2) {
+    if (this.source === 2) { // 陕西交警
       if (this.ranking <= 200) {
         this.ranking = 50;
         this.title.setTitle('我要领奖');
@@ -111,12 +131,13 @@ export class GetComponent implements OnInit {
    * @param mobile
    * @param name
    */
-  affirm(address: string, mobile: string, name: string): void {
-    if (this.regVerify(address, mobile, name)) {
-      this.answerActivityService.updateUserInfo(address, mobile, name)
+  affirm(name: string, mobile: string, address: string): void {
+    if (this.regVerify(name, mobile, address)) {
+      this.answerActivityService.updateUserInfo(name, mobile, address)
         .then(res => {
           console.log(res);
           this.showShade = true;
+          this.isDisabled = true;
         })
         .catch();
     }
@@ -138,29 +159,39 @@ export class GetComponent implements OnInit {
       alert('请输入正确的手机号！');
       return;
     } else {
-      /**
-       * 领取奖品
-       * @param mobile
-       */
-      this.answerActivityService.receive(mobile)
-        .then(res => {
-          console.log(res);
-          this.router.navigate(['success']);
-        })
-        .catch(res => {
-          console.log(res);
-          if (JSON.parse(res._body).code === 'rewardHasBeenReceived.answer.activity.NotRule') {
-            alert('该奖品已被领取！');
-          } else if (JSON.parse(res._body).code === 'rewardInfoNotExist.answer.activity') {
-            alert('暂无奖品信息');
-          } else if (JSON.parse(res._body).code === 'coupons.AuthFail') {
-            alert('该手机号已领取过奖品！');
-          }
-          /*  else if (JSON.parse(res._body).code === 'rewardInfo.answer.activity.NotFound') {
-           alert('暂无奖品信息');
-           } */
-        });
+      if (!this.isClick) {
+        this.receive(mobile);
+      }
+
     }
   }
 
+  /**
+   * 领取奖品
+   * @param mobile
+   */
+  receive(mobile: string): void {
+    this.answerActivityService.receive(mobile)
+      .then(res => {
+        this.isClick = true;
+        console.log(res);
+        this.router.navigate(['success']);
+      })
+      .catch(res => {
+        this.isClick = true;
+        console.log(res);
+        if (JSON.parse(res._body).code === 'rewardHasBeenReceived.answer.activity.NotRule') {
+          alert('该奖品已被领取！');
+        } else if (JSON.parse(res._body).code === 'rewardInfoNotExist.answer.activity') {
+          alert('暂无奖品信息');
+        } else if (JSON.parse(res._body).code === 'coupons.AuthFail') {
+          alert('该手机号已领取过奖品！');
+        }
+        /*  else if (JSON.parse(res._body).code === 'rewardInfo.answer.activity.NotFound') {
+         alert('暂无奖品信息');
+         } */
+      });
+  }
 }
+
+
