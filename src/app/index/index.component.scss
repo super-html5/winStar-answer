@@ -23,7 +23,8 @@
     @include location(30%, 18%);
   }
   .userRanking {
-    @include location(29.5%, 19.2%);
+    @include location(29%, 19.6%);
+    width: 14%;
     color: #00ddb4;
     font-size: 1.3rem;
     font-weight: bold;
@@ -38,6 +39,7 @@
   }
   .notRanking {
     @include location(29%, 19.6%);
+    width: 14%;
     color: #00ddb4;
     font-size: 1.1rem;
     font-weight: bold;
