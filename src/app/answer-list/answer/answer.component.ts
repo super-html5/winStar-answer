@@ -147,6 +147,7 @@ export class AnswerComponent implements OnInit {
       this._timer -= 1;
       if (this._timer === 0) {
         this.saveUserRecord(0);
+        this._endTime = new Date().getTime().toString();
         clearInterval(this._progressBarTimer);
         this.imgAlert(2);
       }
