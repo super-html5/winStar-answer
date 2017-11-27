@@ -3,6 +3,7 @@ import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {flyIn} from '../animationsVariable';
 import {AnswerActivityService} from '../service/answerActivity.service';
+
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -41,12 +42,15 @@ export class IndexComponent implements OnInit {
    * 创建用户信息
    */
   createWechatUserInfo(): void {
-    this.answerActivityService.createWechatUserInfo('olQf5t6N3ZdQNf9bB5BZ3r__KDz4', '朱燕妮')
+    const _openid = localStorage.getItem('openid');
+    const _nickname = localStorage.getItem('nickname');
+    this.answerActivityService.createWechatUserInfo(_openid, _nickname)
       .then(res => {
-        console.log(res);
-        localStorage.setItem('_openid', res.openid);
+
       })
-      .catch(res => console.log(res));
+      .catch(res => {
+        alert('当前服务器繁忙，请稍后再试');
+      });
   }
 
   /**

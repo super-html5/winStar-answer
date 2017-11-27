@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import {QuestionInfo} from '../../entity/answerActivity';
 import {Router} from '@angular/router';
+import {AnswerListService} from '../../service/answerList.service';
 
 @Component({
   selector: 'app-answer',
@@ -42,6 +43,15 @@ export class AnswerComponent implements OnInit {
    * 题库总长度
    */
   _questionLength: number;
+  /**
+   * 答题开始时间
+   */
+  _startTime: string;
+
+  /**
+   * 答题结束时间
+   */
+  _endTime: string;
 
   @ViewChild('bigBox') bigBox: ElementRef;
   @ViewChild('progressBar') progressBar: ElementRef;
@@ -52,11 +62,12 @@ export class AnswerComponent implements OnInit {
   _alertStr: string;
   _alertBtnStr: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private answerListService: AnswerListService) {
 
   }
 
   ngOnInit() {
+    this._startTime = new Date().getTime().toString();
     this.onProgressBarInit();
     this.remainingTimer();
   }
@@ -135,27 +146,70 @@ export class AnswerComponent implements OnInit {
     this._progressBarTimer = setInterval(() => {
       this._timer -= 1;
       if (this._timer === 0) {
+        this.saveUserRecord(0);
         clearInterval(this._progressBarTimer);
         this.imgAlert(2);
       }
     }, 1000);
   }
 
+  /**
+   * 答题
+   * @param {string} answer
+   */
   chooseOne(answer: string): void {
-    if (this._index === this._questionLength) {
-      // todo 此处需要弹窗提示，已经回答全部题库，结束答题
-      this.imgAlert(3);
-      return;
-    }
     if (answer === this._questionInfo.answer) {
+      if (this._index === this._questionLength) {
+        this._endTime = new Date().getTime().toString();
+        this.saveUserRecord(1);
+        clearInterval(this._progressBarTimer);
+        clearInterval(this._progressBar);
+        this.imgAlert(3);
+        return;
+      }
       this.onVoted.emit(true);
     } else {
+      this._endTime = new Date().getTime().toString();
+      this.saveUserRecord(0);
       clearInterval(this._progressBarTimer);
       clearInterval(this._progressBar);
       this.imgAlert(1);
       return;
     }
   }
+
+  /**
+   * 答题日志
+   * @param answerLog
+   */
+  saveAnswerQuestionLog(answerLog: any): void {
+    this.answerListService.saveAnswerQuestionLog(answerLog, this._index.toString())
+      .then(res => {
+        console.log(res);
+      })
+      .catch(res => {
+        console.log(res);
+      });
+  }
+
+  /**
+   * 保存答题分数
+   */
+  saveUserRecord(isUp: number): void {
+    let _record = 0;
+    if (isUp === 1) {
+      _record = this._index + 1;
+    } else if (isUp === 0) {
+      _record = this._index;
+    }
+    this.answerListService.saveUserRecord(this._startTime, this._endTime, _record.toString())
+      .then(res => {
+        console.log(res);
+      }).catch(res => {
+      console.log(res);
+    })
+  }
+
 
   /**
    * 弹出框
