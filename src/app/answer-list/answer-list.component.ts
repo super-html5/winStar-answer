@@ -22,7 +22,7 @@ export class AnswerListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title.setTitle('遵法守规明礼  安全文明出行');
+    this.title.setTitle('尊法守规明礼  安全文明出行');
     this.getQuestionList();
   }
 

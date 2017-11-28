@@ -45,5 +45,13 @@ export class AnswerListService {
       .catch()
   }
 
+  getShare(): Promise<any> {
+    const url = window.document.location.href;
+    const getShareUrl = `/wechat_access/api/v1/wechatCommon/noauth/getWechatShareData?url=${url}`;
+    return this.http.get(getShareUrl)
+      .toPromise()
+      .then(res => res.json() as any)
+      .catch()
+  }
 
 }
