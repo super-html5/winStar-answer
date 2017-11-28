@@ -69,6 +69,7 @@ export class AppComponent implements OnInit {
         let fxImgUrl = 'https://mobile.sxwinstar.net/wechat/answer/assets/img/answer/391511838393_.pic.jpg';
         let fxDesc = '交通安全知识大闯关，前200名均有礼品哦！';
         let link = 'https://mobile.sxwinstar.net/wechat/index.php?type=login&menu=answer';
+
         wx.ready(function () {
           // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
 
