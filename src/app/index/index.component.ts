@@ -23,7 +23,7 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title.setTitle('答题');
+    this.title.setTitle('遵法守规明礼  安全文明出行');
     this.IsPC();
   }
 

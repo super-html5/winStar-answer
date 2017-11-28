@@ -11,7 +11,7 @@ export class GetSuccessComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title.setTitle('领奖成功');
+    this.title.setTitle('遵法守规明礼  安全文明出行');
   }
 
   downLoad(): void {
