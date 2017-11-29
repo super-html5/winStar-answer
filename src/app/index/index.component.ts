@@ -68,7 +68,6 @@ export class IndexComponent implements OnInit {
       })
       .catch(() => {
         this.isHaveLoad = false;
-        this.userRanking = '未上榜';
         this.isRanking = false;
       });
   }
