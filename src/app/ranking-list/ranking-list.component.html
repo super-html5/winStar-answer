@@ -14,7 +14,7 @@
             <img *ngIf="i < 3" class="align-middle" src='./assets/img/page2_{{i+1}}.png' alt="">
             <span *ngIf="i >= 3">{{i+1}}</span>
           </span>
-          <span class="float-left text-center text-truncate px-1">{{rank.nickName}}</span>
+          <span class="float-left text-center text-truncate px-1">{{rank.nickName || "匿名用户"}}</span>
           <span class="float-left text-center">{{rank.highestScore}}</span>
         </li>
       </ul>
