@@ -48,6 +48,10 @@ export const environment = {
   /**
    * 保存答题日志
    */
-  questionLog: '/wechatApi-ng4/api/v1/activity/noauth/answer/saveAnswerQuestionLog'
+  questionLog: '/wechatApi-ng4/api/v1/activity/noauth/answer/saveAnswerQuestionLog',
 
+  /**
+   * 分享接口
+   */
+  getShare: '/share/api/v1/wechatCommon/noauth/getWechatShareData'
 };

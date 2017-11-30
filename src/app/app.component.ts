@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {AnswerListService} from './service/answerList.service';
-
 declare var wx: any;
 
 @Component({
@@ -8,7 +7,7 @@ declare var wx: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
 
   constructor(private answerListService: AnswerListService) {
@@ -18,27 +17,33 @@ export class AppComponent implements OnInit {
   title = 'app';
 
   ngOnInit() {
-    this.share()
+  }
+
+  ngAfterViewInit() {
+    console.log('1');
+    this.share();
   }
 
   share(): void {
     this.answerListService.getShare()
       .then(data => {
+        console.log(data);
         wx.config({
           debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
           appId: data.wxData.appid,
           timestamp: data.wxData.timestamp, // 必填，生成签名的时间戳
           nonceStr: data.wxData.nonceStr, // 必填，生成签名的随机串
-          signature: data.wxData.signature,// 必填，签名
+          signature: data.wxData.signature, // 必填，签名
           jsApiList: [
             'onMenuShareTimeline',
             'onMenuShareAppMessage',
-            'onMenuShareQQ'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            'onMenuShareQQ'
+          ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         });
-        let fxTitle = '尊法守规明礼  安全文明出行';
-        let fxImgUrl = 'https://mobile.sxwinstar.net/wechat/answer/assets/img/answer/391511838393_.pic.jpg';
-        let fxDesc = '交通安全知识大闯关，前200名均有礼品哦！';
-        let link = 'https://mobile.sxwinstar.net/wechat/index.php?type=login&menu=answer';
+        const fxTitle = '尊法守规明礼  安全文明出行';
+        const fxImgUrl = 'https://mobile.sxwinstar.net/wechat/answer/assets/img/answer/391511838393_.pic.jpg';
+        const fxDesc = '交通安全知识大闯关，前200名均有礼品哦！';
+        const link = 'https://mobile.sxwinstar.net/wechat/index.php?type=login&menu=answer';
 
         wx.ready(function () {
           // 2. 分享接口
@@ -49,16 +54,12 @@ export class AppComponent implements OnInit {
             link: link,
             imgUrl: fxImgUrl,
             trigger: function (res) {
-              //alert('用户点击发送给朋友');
             },
             success: function (res) {
-              //alert('分享成功！');
             },
             cancel: function (res) {
-              //alert('已取消');
             },
             fail: function (res) {
-              //alert(JSON.stringify(res));
             }
           });
 
@@ -68,16 +69,12 @@ export class AppComponent implements OnInit {
             link: link,
             imgUrl: fxImgUrl,
             trigger: function (res) {
-              //alert('用户点击分享到朋友圈');
             },
             success: function (res) {
-              //alert('分享成功！');
             },
             cancel: function (res) {
-              //alert('已取消');
             },
             fail: function (res) {
-              //alert(JSON.stringify(res));
             }
           });
 
@@ -88,20 +85,14 @@ export class AppComponent implements OnInit {
             link: link,
             imgUrl: fxImgUrl,
             trigger: function (res) {
-              //alert('用户点击分享到QQ');
             },
             complete: function (res) {
-              //alert(JSON.stringify(res));
             },
             success: function (res) {
-              //alert('分享成功！');
-
             },
             cancel: function (res) {
-              //alert('已取消');
             },
             fail: function (res) {
-              //alert(JSON.stringify(res));
             }
           });
         });
