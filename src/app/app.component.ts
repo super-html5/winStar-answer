@@ -14,18 +14,22 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   }
 
-  title = 'app';
-
   ngOnInit() {
+    if (!localStorage.getItem('openid')) {
+      location.href = 'https://mobile.sxwinstar.net/wechat/index.php?type=login&menu=answer';
+    }
+    return;
   }
 
   ngAfterViewInit() {
-    console.log('1');
-    this.share();
+    setTimeout(() => {
+      this.share();
+    }, 500);
   }
 
   share(): void {
-    this.answerListService.getShare()
+    const url = location.href.split('#')[0];
+    this.answerListService.getShare(url)
       .then(data => {
         console.log(data);
         wx.config({
@@ -86,8 +90,6 @@ export class AppComponent implements OnInit, AfterViewInit {
             imgUrl: fxImgUrl,
             trigger: function (res) {
             },
-            complete: function (res) {
-            },
             success: function (res) {
             },
             cancel: function (res) {
@@ -100,6 +102,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         wx.error(function (res) {
         });
       })
-      .catch()
+      .catch();
   }
 }

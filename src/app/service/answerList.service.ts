@@ -45,8 +45,7 @@ export class AnswerListService {
       .catch()
   }
 
-  getShare(): Promise<any> {
-    const url = location.href.split('#')[0];
+  getShare(url: string): Promise<any> {
     const getShareUrl = `${environment.getShare}?url=${url}`;
     return this.http.get(getShareUrl)
       .toPromise()
