@@ -53,9 +53,9 @@ export class GetComponent implements OnInit {
         this.ranking = res.ranking;
         // this.ranking = 20;
         this.userRanking = res.ranking;
-        if (res.reward = '警察公仔摆件一个') {
+        if (res.reward === '警察公仔摆件一个') {
           this.pageReward = './assets/img/page-address3.png';
-        } else if (res.reward = '双肩包一个') {
+        } else if (res.reward === '双肩包一个') {
           this.source = 2;
           this.pageReward = './assets/img/page-address1.png';
         }

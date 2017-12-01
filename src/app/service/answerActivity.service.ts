@@ -19,7 +19,7 @@ export class AnswerActivityService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private openidHeaders = new Headers({'Content-Type': 'application/json', 'openid': localStorage.getItem('openid')});
-  private source = 1;
+  private source = 2;
 
   /**
    * 创建用户信息
