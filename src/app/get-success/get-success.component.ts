@@ -14,6 +14,11 @@ export class GetSuccessComponent implements OnInit {
     this.title.setTitle('尊法守规明礼  安全文明出行');
   }
 
+  banImg(event): void {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
   downLoad(): void {
     const u = navigator.userAgent, app = navigator.appVersion;
     const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1;
