@@ -1,10 +1,10 @@
 <div class="row">
-  <img class="position-absolute w-100 h-100 unifyBg" src="./assets/img/page-share1.jpg" alt="">
+  <img class="position-absolute w-100 h-100 unifyBg" src="./assets/img/page-share1.jpg" alt="" (click)="banImg($event)">
   <div [ngSwitch]="ranking" class="col-12 px-0">
     <div *ngSwitchCase="50" class="bigBox">
 
       <div class="w-100 page-addr-top position-relative">
-        <img class="w-100 page-address1" [src]="pageReward" alt="">
+        <img class="w-100 page-address1" [src]="pageReward" alt="" (click)="banImg($event)">
         <p class="position-absolute page-rank text-center">您的名次为第<span class="px-1">{{userRanking}}</span>名</p>
       </div>
       <div class="page-addr-content py-3" *ngIf="inputValue">
@@ -22,22 +22,22 @@
     </div>
     <div *ngSwitchCase="200" class="w-100 position-relative">
       <div class="w-100 page-get-top position-relative">
-        <img class="w-100 page-get" src="./assets/img/page-get.png" alt="">
+        <img class="w-100 page-get" src="./assets/img/page-get.png" alt="" (click)="banImg($event)">
         <p class="position-absolute page-get-rank text-center">您的名次为第<span class="px-1">{{userRanking}}</span>名</p>
       </div>
 
       <input #couponTel class="position-absolute page-get-input text-center py-2" type="tel" maxlength="11"
              placeholder="请输入手机号，领取优惠券">
-      <img (click)="toLinkSuccess(couponTel.value)" class="w-75 mt-5 btn_affirm" src="./assets/img/btn_affirm.png" alt="">
+      <img (click)="toLinkSuccess(couponTel.value)" class="w-75 mt-5 btn_affirm" src="./assets/img/btn_affirm.png" alt="" (click)="banImg($event)">
     </div>
     <div *ngSwitchCase="201" class="w-100">
-      <img class="page-get-notWin" src="./assets/img/page-get-notWin.png" alt="">
-      <img class="w-75 mt-5 btn_affirm" src="./assets/img/btn_affirm.png" alt="">
+      <img class="page-get-notWin" src="./assets/img/page-get-notWin.png" alt="" (click)="banImg($event)">
+      <img class="w-75 mt-5 btn_affirm" src="./assets/img/btn_affirm.png" alt="" (click)="banImg($event)">
     </div>
   </div>
 </div>
 <div *ngIf="showShade" (click)="hiddenShade()" class="addr-success position-fixed h-100">
-  <img class="position-absolute" src="./assets/img/page-addr-success.png" alt="">
-  <img class="position-absolute" src="./assets/img/button-confirm.png" alt="">
+  <img class="position-absolute" src="./assets/img/page-addr-success.png" alt="" (click)="banImg($event)">
+  <img class="position-absolute" src="./assets/img/button-confirm.png" alt="" (click)="banImg($event)">
 </div>
 <div *ngIf="showShade" class="w-100 shade position-fixed"></div>

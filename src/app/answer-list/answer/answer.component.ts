@@ -72,7 +72,10 @@ export class AnswerComponent implements OnInit {
     this.onProgressBarInit();
     this.remainingTimer();
   }
-
+  banImg(event): void {
+    event.preventDefault();
+    event.stopPropagation();
+  }
   /**
    * 获取单个题库
    * @param {QuestionInfo} questionInfo

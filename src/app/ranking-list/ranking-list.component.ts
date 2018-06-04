@@ -19,6 +19,11 @@ export class RankingListComponent implements OnInit {
     this.getActivityRanking();
   }
 
+  banImg(event): void {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
   getActivityRanking(): void {
     this.answerActivityService.getActivityRanking()
       .then(res => {

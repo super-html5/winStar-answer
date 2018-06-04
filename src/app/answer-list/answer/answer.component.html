@@ -12,10 +12,10 @@
   </div>
 
   <div class="col-12">
-    <img class="w-100 img-fluid" src="./assets/img/page1_02_content1.png">
+    <img class="w-100 img-fluid" src="./assets/img/page1_02_content1.png" (click)="banImg($event)">
     <div class="w-100 question_bottom">
       <p>{{_index+1}}.{{_questionInfo?.title}}</p>
-      <img style="width: 100%; padding: 0 1rem 1rem 1rem" *ngIf="_questionInfo.image" src="http://wsdimg1.sxwinstar.net/{{_questionInfo?.image}}">
+      <img style="width: 100%; padding: 0 1rem 1rem 1rem" *ngIf="_questionInfo.image" src="http://wsdimg1.sxwinstar.net/{{_questionInfo?.image}}" (click)="banImg($event)">
     </div>
   </div>
   <div class="col-12 mt-4">

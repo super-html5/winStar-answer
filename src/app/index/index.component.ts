@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {flyIn} from '../animationsVariable';
 import {AnswerActivityService} from '../service/answerActivity.service';
 
@@ -19,10 +19,14 @@ export class IndexComponent implements OnInit {
 
   constructor(private title: Title,
               private answerActivityService: AnswerActivityService,
+              private activatedRoute: ActivatedRoute,
               private router: Router) {
   }
 
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(res => {
+      console.log(res);
+    });
     this.title.setTitle('尊法守规明礼  安全文明出行');
     this.IsPC();
   }
@@ -85,5 +89,10 @@ export class IndexComponent implements OnInit {
         }
       })
       .catch(res => console.log(res));
+  }
+
+  banImg(event): void {
+    event.preventDefault();
+    event.stopPropagation();
   }
 }

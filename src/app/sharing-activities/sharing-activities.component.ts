@@ -14,4 +14,8 @@ export class SharingActivitiesComponent implements OnInit {
     this.title.setTitle('尊法守规明礼  安全文明出行');
   }
 
+  banImg(event): void {
+    event.preventDefault();
+    event.stopPropagation();
+  }
 }

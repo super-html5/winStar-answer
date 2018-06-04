@@ -27,7 +27,10 @@ export class GetComponent implements OnInit {
     this.getWechatUserInfo();
     this.getRewardInfo();
   }
-
+  banImg(event): void {
+    event.preventDefault();
+    event.stopPropagation();
+  }
   /**
    * 判断是否领取过实物奖
    */

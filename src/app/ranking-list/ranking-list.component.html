@@ -1,6 +1,6 @@
 <div class="row">
-  <img class="position-absolute w-100 h-100 unifyBg" src="./assets/img/page-share1.jpg" alt="">
-  <img class="position-absolute smallBg" src="./assets/img/page-rank.png" alt="">
+  <img class="position-absolute w-100 h-100 unifyBg" src="./assets/img/page-share1.jpg" alt="" (click)="banImg($event)">
+  <img class="position-absolute smallBg" src="./assets/img/page-rank.png" alt="" (click)="banImg($event)">
   <div class="col-12 rank-content position-absolute w-100 h-100 px-0">
     <div class="bg-white rank_list">
       <div class="rank_list_top py-3">
@@ -11,7 +11,7 @@
       <ul class="rank_list_name mt-1">
         <li *ngFor="let rank of rankList, let i=index">
           <span class="float-left text-center">
-            <img *ngIf="i < 3" class="align-middle" src='./assets/img/page2_{{i+1}}.png' alt="">
+            <img *ngIf="i < 3" class="align-middle" src='./assets/img/page2_{{i+1}}.png' alt="" (click)="banImg($event)">
             <span *ngIf="i >= 3">{{i+1}}</span>
           </span>
           <span class="float-left text-center text-truncate px-1">{{rank.nickName || "匿名用户"}}</span>
