@@ -21,12 +21,13 @@ export class AnswerListService {
       .catch()
   }
 
-  saveUserRecord(startTime: string, endTime: string, highestScore: string): Promise<any> {
+  saveUserRecord(startTime: string, endTime: string, highestScore: string, activityId: string): Promise<any> {
     const saveUserRecordUrl = `${environment.questionRecord}`;
     return this.http.post(saveUserRecordUrl, {
       'startTime': startTime,
       'endTime': endTime,
-      'highestScore': highestScore
+      'highestScore': highestScore,
+      'activityId': activityId
     }, {headers: this.headers})
       .toPromise()
       .then(res => res.json() as any)
@@ -34,22 +35,26 @@ export class AnswerListService {
   }
 
 
-  saveAnswerQuestionLog(questionLog: any, highestScore: string): Promise<any> {
+  saveAnswerQuestionLog(questionLog: any, highestScore: string, activityId: string): Promise<any> {
     const saveAnswerQuestionLogUrl = `${environment.questionLog}`;
     return this.http.post(saveAnswerQuestionLogUrl, {
       'answerDetails': JSON.stringify(questionLog),
-      'highestScore': highestScore
+      'highestScore': highestScore,
+      'activityId': activityId
     }, {headers: this.headers})
       .toPromise()
       .then(res => res.json() as any)
       .catch()
   }
 
-  getShare(url: string): Promise<any> {
+  getShare(): Promise<any> {
+    const url = location.href.split('#')[0];
+    // const getShareUrl = `/wechat_access/api/v1/wechatCommon/traffic/noauth/getWechatShareData?url=${url}`;
     const getShareUrl = `${environment.getShare}?url=${url}`;
     return this.http.get(getShareUrl)
       .toPromise()
       .then(res => res.json() as any)
-      .catch();
+      .catch()
   }
+
 }

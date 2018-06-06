@@ -1,0 +1,18 @@
+@mixin location($left,$top) {
+  left: $left;
+  top: $top;
+}
+
+.bigBox {
+  text-align: center;
+  img:nth-of-type(1) {
+    @include location(0, 0);
+    z-index: -100;
+  }
+  img.mt-minus {
+    margin-top: -2rem;
+  }
+  .z-big-index {
+    z-index: 100;
+  }
+}

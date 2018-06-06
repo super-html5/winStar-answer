@@ -15,6 +15,8 @@ export class IndexComponent implements OnInit {
   userRanking: string;
   isRanking: boolean = true;
   onOrOff: string = './assets/img/home-page_02.jpg';
+  imgRuleSrc: string = './assets/img/home-page_05.jpg';
+  activityId: string;
   isHaveLoad: boolean = false;
 
   constructor(private title: Title,
@@ -24,48 +26,34 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe(res => {
+    this.activatedRoute.params.subscribe(res => {
       console.log(res);
+      localStorage.setItem('answerIntoActivityId', res.activityId);
+      this.activityId = res.activityId;
+      if (res.activityId === '8a80cb815fc885e2015fc891dbb20003') {
+        this.imgRuleSrc = './assets/img/home-page_05_1.jpg';
+      }
+      if (res.status === 'REWARDING') {
+        this.IsPastDate = true;
+        this.onOrOff = './assets/img/home-page_02_off.jpg';
+      }
     });
     this.title.setTitle('尊法守规明礼  安全文明出行');
-    this.IsPC();
+    this.getUserActivityRanking();
+
   }
 
-
-  IsPC(): void {
-    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || /(Android)/i.test(navigator.userAgent)) {
-      this.createWechatUserInfo();
-      return;
-    } else {
-      this.router.navigate(['pcHint']);
-    }
-  }
-
-  /**
-   * 创建用户信息
-   */
-  createWechatUserInfo(): void {
-    const _openid = localStorage.getItem('openid');
-    const _nickname = localStorage.getItem('nickname');
-    this.answerActivityService.createWechatUserInfo(_openid, _nickname)
-      .then(res => {
-        this.activityInfo();
-      })
-      .catch(res => {
-        alert('当前服务器繁忙，请稍后再试');
-      });
-  }
 
   /**
    * 用户当前排名
    */
   getUserActivityRanking(): void {
     this.isHaveLoad = true;
-    this.answerActivityService.getUserActivityRanking()
+    this.answerActivityService.getUserActivityRanking(this.activityId)
       .then(res => {
         this.isHaveLoad = false;
         this.userRanking = res.result;
-        if (this.userRanking.length >= 5) {
+        if (this.userRanking.length >= 5 || Number(this.userRanking) === 0) {
           this.userRanking = '未上榜';
           this.isRanking = false;
         }
@@ -79,17 +67,17 @@ export class IndexComponent implements OnInit {
   /**
    * 获取活动状态
    */
-  activityInfo(): void {
-    this.answerActivityService.activityInfo()
-      .then(res => {
-        this.getUserActivityRanking();
-        if (res.result === 'OFF') {
-          this.IsPastDate = true;
-          this.onOrOff = './assets/img/home-page_02_off.jpg';
-        }
-      })
-      .catch(res => console.log(res));
-  }
+  /* activityInfo(): void {
+   this.answerActivityService.activityInfo()
+   .then(res => {
+   this.getUserActivityRanking();
+   if (res.result === 'OFF') {
+   this.IsPastDate = true;
+   this.onOrOff = './assets/img/home-page_02_off.jpg';
+   }
+   })
+   .catch(res => console.log(res));
+   }*/
 
   banImg(event): void {
     event.preventDefault();

@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="bigBox col-12 px-0 position-relative pb-3">
+    <img class="position-absolute w-100" src="./assets/img/first/first_bg.png" alt="" (click)="banImg($event)">
+    <img class="mt-4" src="./assets/img/first/first_font.png" alt="" width="84%" (click)="banImg($event)">
+    <!--activity1Status未开始-->
+    <img *ngIf="activity1Status==='NOT_START'" class="z-big-index mt-minus" src="./assets/img/first/2-1.png" alt="" width="84%"
+         (click)="banImg($event)">
+    <!--activity1Status已开始-->
+    <img *ngIf="activity1Status==='ON'" class="z-big-index mt-minus" src="./assets/img/first/1-1.png" alt=""
+         [routerLink]="['/index',{'activityId':'8a80cb815fc885e2015fc891dbb20002','status':activity1Status}]"
+          width="84%">
+    <!--activity1Status可以领奖-->
+    <img *ngIf="activity1Status==='REWARDING'" class="z-big-index mt-minus" src="./assets/img/first/4-1.png" alt=""
+         [routerLink]="['/index',{'activityId':'8a80cb815fc885e2015fc891dbb20002','status':activity1Status}]"
+         width="84%">
+    <!--activity1Status已结束-->
+    <img *ngIf="activity1Status==='OFF'" class="z-big-index mt-minus" src="./assets/img/first/3-1.png" alt="" width="84%" (click)="banImg($event)">
+
+    <!--activity2Status未开始-->
+    <img *ngIf="activity2Status==='NOT_START'" class="z-big-index mt-3" src="./assets/img/first/2-2.png" alt="" width="84%" (click)="banImg($event)">
+    <!--activity2Status已开始-->
+    <img *ngIf="activity2Status==='ON'" class="z-big-index mt-3" src="./assets/img/first/1-2.png"
+         [routerLink]="['/index',{'activityId':'8a80cb815fc885e2015fc891dbb20003','status':activity2Status}]"
+          alt="" width="84%">
+    <!--activity2Status可以领奖-->
+    <img *ngIf="activity2Status==='REWARDING'" class="z-big-index mt-3" src="./assets/img/first/4-2.png"
+         [routerLink]="['/index',{'activityId':'8a80cb815fc885e2015fc891dbb20003','status':activity2Status}]"
+         alt="" width="84%">
+    <!--activity2Status已结束-->
+    <img *ngIf="activity2Status==='OFF'" class="z-big-index mt-3" src="./assets/img/first/3-2.png" alt="" width="84%" (click)="banImg($event)">
+  </div>
+</div>
+
+<div id="mess_loaddinghtml5" *ngIf="isHaveLoad">
+  <div class="loadding">
+    <div class="loaddingtishi"></div>
+    <div class="spinner">
+      <div class="spinner-container container1">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+      </div>
+      <div class="spinner-container container2">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+      </div>
+      <div class="spinner-container container3">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,8 +8,10 @@ import {GetSuccessComponent} from './get-success/get-success.component';
 import {RankingListComponent} from './ranking-list/ranking-list.component';
 import {PcHintComponent} from './pc-hint/pc-hint.component';
 import {SharingActivitiesComponent} from './sharing-activities/sharing-activities.component';
+import {FirstPageComponent} from './first-page/first-page.component';
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'index'},
+  {path: '', pathMatch: 'full', redirectTo: 'first'},
+  {path: 'first', component: FirstPageComponent},
   {path: 'index', component: IndexComponent},
   {path: 'answer', component: AnswerListComponent},
   {path: 'get', component: GetComponent},

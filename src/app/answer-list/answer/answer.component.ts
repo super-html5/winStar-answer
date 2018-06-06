@@ -26,7 +26,7 @@ export class AnswerComponent implements OnInit {
    * @type {number}
    * @private
    */
-  _timer: number = 15;
+  _timer: number = 30;
   /**
    * 倒计时条儿定时器
    */
@@ -72,10 +72,12 @@ export class AnswerComponent implements OnInit {
     this.onProgressBarInit();
     this.remainingTimer();
   }
+
   banImg(event): void {
     event.preventDefault();
     event.stopPropagation();
   }
+
   /**
    * 获取单个题库
    * @param {QuestionInfo} questionInfo
@@ -84,7 +86,7 @@ export class AnswerComponent implements OnInit {
   @Input()
   set QuestionInfo(questionInfo: QuestionInfo) {
     this._questionInfo = questionInfo;
-    this._timer = 15;
+    this._timer = 30;
     this.progressBar.nativeElement.style.width = '100%';
   }
 
@@ -126,7 +128,7 @@ export class AnswerComponent implements OnInit {
   onProgressBarInit(): void {
     this._progressBar = setInterval(() => {
       this.progressBar.nativeElement.style.width = this.remainingProgressBar();
-    }, 150);
+    }, 300);
   }
 
   /**
@@ -185,7 +187,7 @@ export class AnswerComponent implements OnInit {
    * @param answerLog
    */
   saveAnswerQuestionLog(answerLog: any): void {
-    this.answerListService.saveAnswerQuestionLog(answerLog, this._index.toString())
+    this.answerListService.saveAnswerQuestionLog(answerLog, this._index.toString(), localStorage.getItem('answerIntoActivityId'))
       .then(res => {
         console.log(res);
       })
@@ -205,7 +207,7 @@ export class AnswerComponent implements OnInit {
     } else if (isUp === 0) {
       _record = this._index;
     }
-    this.answerListService.saveUserRecord(this._startTime, this._endTime, _record.toString())
+    this.answerListService.saveUserRecord(this._startTime, this._endTime, _record.toString(), localStorage.getItem('answerIntoActivityId'))
       .then(res => {
         this.isHaveLoad = false;
         this.imgAlert(flag);
@@ -235,6 +237,6 @@ export class AnswerComponent implements OnInit {
   }
 
   hiddenShade(): void {
-    this.router.navigate(['/index']);
+    this.router.navigate(['/index', {'activityId': localStorage.getItem('answerIntoActivityId')}]);
   }
 }

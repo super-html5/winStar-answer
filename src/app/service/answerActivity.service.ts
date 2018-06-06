@@ -19,7 +19,7 @@ export class AnswerActivityService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private openidHeaders = new Headers({'Content-Type': 'application/json', 'openid': localStorage.getItem('openid')});
-  private source = 1;
+  private source = 2;
 
   /**
    * 创建用户信息
@@ -45,10 +45,10 @@ export class AnswerActivityService {
    * @param source
    * @returns {Promise<TResult|TResult2|UpdateUserInfo>}
    */
-  updateUserInfo(name: string, mobile: string, address: string): Promise<UpdateUserInfo> {
+  updateUserInfo(name: string, mobile: string, address: string, activityId: string): Promise<UpdateUserInfo> {
     const updateUserInfoUrl = environment.updateUserInfo;
     return this.http.post(updateUserInfoUrl,
-      {'address': address, 'mobile': mobile, 'name': name, 'source': this.source},
+      {'address': address, 'mobile': mobile, 'name': name, 'source': this.source, 'activityId': activityId},
       {headers: this.openidHeaders}
     )
       .toPromise()
@@ -60,8 +60,8 @@ export class AnswerActivityService {
    * 判断是否领取过实物奖
    * @returns {Promise<TResult|TResult2|GetWechatUserInfo>}
    */
-  getWechatUserInfo(): Promise<GetWechatUserInfo> {
-    const getUserInfoUrl = environment.getUserInfoUrl;
+  getWechatUserInfo(activityId: string): Promise<GetWechatUserInfo> {
+    const getUserInfoUrl = `${environment.getUserInfoUrl}?activityId=${activityId}`;
     return this.http.post(getUserInfoUrl, '', {headers: this.openidHeaders})
       .toPromise()
       .then(res => res.json() as GetWechatUserInfo)
@@ -72,8 +72,8 @@ export class AnswerActivityService {
    * 排行榜信息
    * @returns {Promise<TResult|TResult2|ActivityRanking>}
    */
-  getActivityRanking(): Promise<ActivityRanking> {
-    const activityRankingUrl = `${environment.getActivityRanking}?source=${this.source}`;
+  getActivityRanking(activityId: string): Promise<ActivityRanking> {
+    const activityRankingUrl = `${environment.getActivityRanking}?source=${this.source}&activityId=${activityId}`;
     return this.http.get(activityRankingUrl, {headers: this.openidHeaders})
       .toPromise()
       .then(res => res.json() as ActivityRanking)
@@ -84,8 +84,8 @@ export class AnswerActivityService {
    * 用户排行
    * @returns {Promise<TResult|TResult2|GetUserActivityRanking>}
    */
-  getUserActivityRanking(): Promise<GetUserActivityRanking> {
-    const getUserRankingUrl = environment.getUserActivityRanking;
+  getUserActivityRanking(activityId: string): Promise<GetUserActivityRanking> {
+    const getUserRankingUrl = `${environment.getUserActivityRanking}?activityId=${activityId}`;
     return this.http.get(getUserRankingUrl, {headers: this.openidHeaders})
       .toPromise()
       .then(res => res.json() as GetUserActivityRanking)
@@ -96,8 +96,8 @@ export class AnswerActivityService {
    * 获取奖品信息
    * @returns {Promise<TResult|TResult2|GetRewardInfo>}
    */
-  getRewardInfo(): Promise<GetRewardInfo> {
-    const getRewardInfoUrl = environment.getRewardInfo;
+  getRewardInfo(activityId: string): Promise<GetRewardInfo> {
+    const getRewardInfoUrl = `${environment.getRewardInfo}?activityId=${activityId}`;
     return this.http.get(getRewardInfoUrl, {headers: this.openidHeaders})
       .toPromise()
       .then(res => res.json() as GetRewardInfo)
@@ -110,8 +110,8 @@ export class AnswerActivityService {
    * @param mobile
    * @returns {Promise<TResult|TResult2|TResult1>}
    */
-  receive(mobile: string): Promise<any> {
-    const receiveUrl = `${environment.receive}?mobile=${mobile}`;
+  receive(mobile: string, activityId: string): Promise<any> {
+    const receiveUrl = `${environment.receive}?mobile=${mobile}&activityId=${activityId}`;
     return this.http.post(receiveUrl, '', {headers: this.openidHeaders})
       .toPromise()
       .then(res => res.json() as any)

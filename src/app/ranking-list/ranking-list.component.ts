@@ -24,8 +24,11 @@ export class RankingListComponent implements OnInit {
     event.stopPropagation();
   }
 
+  /**
+   * 排行榜
+   */
   getActivityRanking(): void {
-    this.answerActivityService.getActivityRanking()
+    this.answerActivityService.getActivityRanking(localStorage.getItem('answerIntoActivityId'))
       .then(res => {
         this.rankList = res;
       })

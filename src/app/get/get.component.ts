@@ -13,7 +13,7 @@ export class GetComponent implements OnInit {
   userRanking: number;
   showShade: boolean = false;
   pageReward: string;
-  source: number;
+  source: number = 2;
   isDisabled: boolean = true;
   isClick: boolean = false;
   inputValue: GetWechatUserInfo;
@@ -27,15 +27,17 @@ export class GetComponent implements OnInit {
     this.getWechatUserInfo();
     this.getRewardInfo();
   }
+
   banImg(event): void {
     event.preventDefault();
     event.stopPropagation();
   }
+
   /**
    * 判断是否领取过实物奖
    */
   getWechatUserInfo(): void {
-    this.answerActivityService.getWechatUserInfo()
+    this.answerActivityService.getWechatUserInfo(localStorage.getItem('answerIntoActivityId'))
       .then(res => {
         console.log(res);
         this.inputValue = res;
@@ -50,7 +52,7 @@ export class GetComponent implements OnInit {
    * 获取奖品信息
    */
   getRewardInfo(): void {
-    this.answerActivityService.getRewardInfo()
+    this.answerActivityService.getRewardInfo(localStorage.getItem('answerIntoActivityId'))
       .then(res => {
         console.log(res);
         this.ranking = res.ranking;
@@ -58,7 +60,7 @@ export class GetComponent implements OnInit {
         this.userRanking = res.ranking;
         if (res.reward === '警察公仔摆件一个') {
           this.pageReward = './assets/img/page-address3.png';
-        } else if (res.reward === '双肩包一个') {
+        } else if (res.reward === '精美不锈钢水杯一个') {
           this.source = 2;
           this.pageReward = './assets/img/page-address1.png';
         }
@@ -67,7 +69,9 @@ export class GetComponent implements OnInit {
       .catch(res => {
         console.log(res);
         if (JSON.parse(res._body).code === 'activityNotOver.answer.activity.NotRule') {
-          alert('活动尚未结束，没法获去奖品。');
+          alert('活动尚未结束，不能领取奖品。');
+        } else if (JSON.parse(res._body).code === 'badRewardingTime.answer.activity.NotRule') {
+          alert('不再领奖时间内，不能领取奖品。');
         }
       });
   }
@@ -78,14 +82,28 @@ export class GetComponent implements OnInit {
    */
   isWin(): void {
     if (this.source === 2) { // 陕西交警
-      if (this.ranking <= 200) {
+      if (this.ranking <= 100 && this.ranking !== 0) {
         this.ranking = 50;
         this.title.setTitle('我要领奖');
-      } else if (this.ranking > 200) {
+        return;
+      } else if (this.ranking > 100) {
         this.ranking = 201;
         this.title.setTitle('未中奖');
         return;
+      } else if (this.ranking === 0) {
+        this.ranking = 201;
+        console.log(this.ranking);
+        this.title.setTitle('未中奖');
+        return;
       }
+      /*if (this.ranking <= 200) {
+       this.ranking = 50;
+       this.title.setTitle('我要领奖');
+       } else if (this.ranking > 200) {
+       this.ranking = 201;
+       this.title.setTitle('未中奖');
+       return;
+       }*/
       return;
     } else {
       if (this.ranking <= 50) {
@@ -100,31 +118,13 @@ export class GetComponent implements OnInit {
         this.ranking = 201;
         this.title.setTitle('未中奖');
         return;
+      } else if (this.ranking === 0) {
+        this.ranking = 201;
+        this.title.setTitle('未中奖');
+        return;
       }
     }
 
-  }
-
-  /**
-   * 验证input的值是否正确
-   * @param address
-   * @param mobile
-   * @param name
-   * @returns {boolean}
-   */
-  regVerify(address: string, mobile: string, name: string) {
-    if (!name) {
-      alert('请输入您的姓名！');
-      return false;
-    } else if (!(/^1[3|4|5|7|8][0-9]{9}$/.test(mobile))) {
-      alert('请输入正确的手机号！');
-      return false;
-    } else if (!address) {
-      alert('请输入您的地址！');
-      return false;
-    } else {
-      return true;
-    }
   }
 
 
@@ -135,14 +135,45 @@ export class GetComponent implements OnInit {
    * @param name
    */
   affirm(name: string, mobile: string, address: string): void {
-    if (this.regVerify(name, mobile, address)) {
-      this.answerActivityService.updateUserInfo(name, mobile, address)
+    console.log(name);
+    if (!name) {
+      alert('请输入您的姓名！');
+    } else if (!(/^1[3|4|5|7|8][0-9]{9}$/.test(mobile))) {
+      alert('请输入正确的手机号！');
+    } else if (!address) {
+      alert('请输入您的地址！');
+    } else {
+      this.answerActivityService.updateUserInfo(name, mobile, address, localStorage.getItem('answerIntoActivityId'))
         .then(res => {
           console.log(res);
           this.showShade = true;
           this.isDisabled = true;
         })
         .catch();
+    }
+  }
+
+  /**
+   * 验证input的值是否正确
+   * @param address
+   * @param mobile
+   * @param name
+   * @returns {boolean}
+   */
+  regVerify(address: string, mobile: string, name: string) {
+    console.log(name);
+
+    if (!name) {
+      alert('请输入您的姓名！');
+      return false;
+    } else if (!(/^1[3|4|5|7|8|9][0-9]{9}$/.test(mobile))) {
+      alert('请输入正确的手机号！');
+      return false;
+    } else if (!address) {
+      alert('请输入您的地址！');
+      return false;
+    } else {
+      return true;
     }
   }
 
@@ -158,10 +189,12 @@ export class GetComponent implements OnInit {
    * @param mobile
    */
   toLinkSuccess(mobile: string): void {
-    if (!(/^1[3|4|5|7|8][0-9]{9}$/.test(mobile))) {
+    if (!(/^1[3|4|5|7|8][0-9]{9}$/.test(mobile))
+    ) {
       alert('请输入正确的手机号！');
       return;
-    } else {
+    }
+    else {
       if (!this.isClick) {
         this.receive(mobile);
       }
@@ -174,7 +207,7 @@ export class GetComponent implements OnInit {
    * @param mobile
    */
   receive(mobile: string): void {
-    this.answerActivityService.receive(mobile)
+    this.answerActivityService.receive(mobile, localStorage.getItem('answerIntoActivityId'))
       .then(res => {
         this.isClick = true;
         console.log(res);

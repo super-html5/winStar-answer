@@ -20,6 +20,7 @@ import {AnswerActivityService} from './service/answerActivity.service';
 import {AnswerListService} from './service/answerList.service';
 
 import {HttpModule} from '@angular/http';
+import { FirstPageComponent } from './first-page/first-page.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {HttpModule} from '@angular/http';
     SharingActivitiesComponent,
     AnswerListComponent,
     AnswerComponent,
-    PcHintComponent
+    PcHintComponent,
+    FirstPageComponent
   ],
   imports: [
     BrowserModule,

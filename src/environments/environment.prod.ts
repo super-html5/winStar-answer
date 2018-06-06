@@ -47,5 +47,6 @@ export const environment = {
   /**
    * 分享接口
    */
-  getShare: '/wechat_access/api/v1/wechatCommon/noauth/getWechatShareData'
+  // getShare: '/wechat_access/api/v1/wechatCommon/noauth/getWechatShareData'
+  getShare: '/wechat_access/api/v1/wechatCommon/traffic/noauth/getWechatShareData'
 };
